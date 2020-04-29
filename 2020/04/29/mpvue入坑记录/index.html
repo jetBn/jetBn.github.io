@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>mpvue入坑记录 | 博客</title>
+  <meta name="description" content="使用MpVue开发小程序记录&amp;#160; &amp;#160; &amp;#160; &amp;#160; 当下轻应用，遍布各大互联网公司。像百度、支付宝、微信、字节都是有自己的小程序形式，就现在QQ也推出了小程序的形式，像这种轻应用又不需要安装，就能打开，而且也类似了app形式。当然相对于形式也不能说不会开发吧，该学的还是得学。所以现在也有很多基于框架延伸而出的打包生成多个平台的小程序，例如 基于react的taro、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mpvue入坑记录">
+<meta property="og:url" content="http://jetbn.github.io/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用MpVue开发小程序记录&amp;#160; &amp;#160; &amp;#160; &amp;#160; 当下轻应用，遍布各大互联网公司。像百度、支付宝、微信、字节都是有自己的小程序形式，就现在QQ也推出了小程序的形式，像这种轻应用又不需要安装，就能打开，而且也类似了app形式。当然相对于形式也不能说不会开发吧，该学的还是得学。所以现在也有很多基于框架延伸而出的打包生成多个平台的小程序，例如 基于react的taro、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-29T02:57:09.000Z">
+<meta property="article:modified_time" content="2020-04-29T02:57:27.000Z">
+<meta property="article:author" content="jetBn">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://jetbn.github.io/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/jetBn" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈文东</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web前端开发工程师</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 杭州, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jetBn" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/Vue3-0%E5%B0%9D%E8%AF%95/" class="title">Vue3.0尝试</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:59:17.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" class="title">Shopify插件开发入坑体验</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:58:15.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" class="title">mpvue入坑记录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:57:09.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-mpvue入坑记录" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mpvue入坑记录
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" class="article-date">
+	  <time datetime="2020-04-29T02:57:09.000Z" itemprop="datePublished">2020-04-29</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="使用MpVue开发小程序记录"><a href="#使用MpVue开发小程序记录" class="headerlink" title="使用MpVue开发小程序记录"></a>使用MpVue开发小程序记录</h2><p>&#160; &#160; &#160; &#160; 当下轻应用，遍布各大互联网公司。像百度、支付宝、微信、字节都是有自己的小程序形式，就现在QQ也推出了小程序的形式，像这种轻应用又不需要安装，就能打开，而且也类似了app形式。当然相对于形式也不能说不会开发吧，该学的还是得学。所以现在也有很多基于框架延伸而出的打包生成多个平台的小程序，例如 基于react的taro、还有wepy、mpvue目前应该这个三个最火热了，然后我尝试了mpvue开发了过程不说坑还是有的。自己也是一步步解决，所以决定记录一下。</p>
+<ol>
+<li><p>首先就搭建了项目使用相关环境自己也是全部尝试了一遍安装了<code>scss</code>环境以及<code>vuex</code>，好像有解决的<code>vue-router</code>自己没有尝试.</p>
+<p>1.1  首先讲下<code>scss</code>的<code>mixin</code>我在全局的时候引入在页面页面中能用，为什么在组件中用不了这是啥我也不是清楚。还有就是我在<code>scss</code>中使用<code>font</code>字体的问题，在此中我通过本地的方式引入发现就是加载不了，后来寻找方案在交流群中得知是得将文件放在<code>static</code>文件下并且使用绝对路径的方式引用，是有效不报错了。但是小程序打包又上传了不了，后来我就直接干脆放服务器上了，再通过引用，这下总没问题了。</p>
+<p>1.2 再次就是<code>vuex</code>在<code>main.js</code>中引用在<code>vue</code>的原型上加而不是像<code>vue-cli</code>中使用一样 直接写在<code>new VUE</code>中。</p>
+<p>在main.js中定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import store from &#39;.&#x2F;store&#39;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">App.mpType &#x3D; &#39;app&#39;</span><br><span class="line">Vue.prototype.$store &#x3D; store</span><br><span class="line"></span><br><span class="line">const app &#x3D; new Vue(App)</span><br><span class="line">app.$mount()</span><br></pre></td></tr></table></figure>
+<p>在页面中使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.state</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用vuex的mapState引用某个state</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 头部导入</span><br><span class="line">import &#123; mapState &#125; from &#39;vuex&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在计算属性中</span><br><span class="line"></span><br><span class="line">...mapState([</span><br><span class="line">  &#39;carBrandCityPrev&#39; &#x2F;&#x2F; 对应stae中定义的</span><br><span class="line">]),</span><br></pre></td></tr></table></figure></li>
+<li><p>自定义TabBar自己刚开始使用也是一头水雾，微信小程序更新的很快。我之前写的一个小程序用的是原生开发的时候，那时候还没有什么定义TabBar啊、导航栏、组件啊什么的。后来我也是看了下官方的demo以及github中mpuve项目的issue中找解决方案，最终还是直接上手搞了一波。中途也是坎坎坷坷。</p>
+<blockquote>
+<p>贴个自定义tabbar地址: <a href="https://github.com/jetBn/mpvue-custom-tab-bar" target="_blank" rel="noopener">https://github.com/jetBn/mpvue-custom-tab-bar</a></p>
+</blockquote>
+</li>
+<li><p>小程序中获取地理位置授权问题，只有在第一次进入的会提示是否授权如果拒绝了授权第二进入都不会授权，都会走授权位置的<code>fail</code>方法,所以这个原因问题。我们只能是通过微信的获取用户的当前设置检查 <code>wx.getSetting</code>api去检查当前是否授权，通过此方法放在<code>fail</code>方法中检测当前是否开启授权地理位置，如果没有重新调用地理位置授权的方法。</p>
+<p> 相关检查是否授权方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; fn指相关重新授权的方法</span><br><span class="line">  export function checkGetLocationPermison (fn) &#123;</span><br><span class="line">    wx.getSetting(&#123;</span><br><span class="line">      success: (res) &#x3D;&gt; &#123;</span><br><span class="line">        const status &#x3D; res.authSetting</span><br><span class="line">        if (!status[&#39;scope.userLocation&#39;]) &#123;</span><br><span class="line">          wx.showModal(&#123;</span><br><span class="line">            title: &#39;是否授权当前位置&#39;,</span><br><span class="line">            content: &#39;需要获取您的地理位置，请确认授权，否则地图功能将无法使用获取不了优惠券信息&#39;,</span><br><span class="line">            success: (subRes) &#x3D;&gt; &#123;</span><br><span class="line">              if (subRes.confirm) &#123;</span><br><span class="line">                wx.openSetting(&#123;</span><br><span class="line">                  success: (subRes) &#x3D;&gt; &#123;</span><br><span class="line">                    if (subRes.authSetting[&#39;scope.userLocation&#39;] &#x3D;&#x3D;&#x3D; true) &#123;</span><br><span class="line">                      wx.showToast(&#123;</span><br><span class="line">                        title: &#39;授权成功&#39;,</span><br><span class="line">                        icon: &#39;success&#39;,</span><br><span class="line">                        duration: 1000</span><br><span class="line">                      &#125;)</span><br><span class="line">                      fn()</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                      wx.showToast(&#123;</span><br><span class="line">                        title: &#39;授权失败&#39;,</span><br><span class="line">                        icon: &#39;success&#39;,</span><br><span class="line">                        duration: 1000</span><br><span class="line">                      &#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      fail: () &#x3D;&gt; &#123;</span><br><span class="line">        wx.showToast(&#123;</span><br><span class="line">          title: &#39;调用授权窗口失败&#39;,</span><br><span class="line">          icon: &#39;success&#39;,</span><br><span class="line">          duration: 1000</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在mpvue是axios全局处理请求返回值以及请求头设置等等。在<code>npm i axios qs</code>后新建<code>request.js</code>文件，引入<code>qs</code>处理<code>axios</code>中post请求，然后微信小程序中是使用<code>wx.request</code>发送请求的并不是直接使用axios就可以的，所以使用<code>axios</code>的<code>adapter</code> 属性进行我们的请求操作。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创建axios实例</span><br><span class="line">const Axios &#x3D; axios.create(&#123;</span><br><span class="line">  baseURL: &#39;&#39;, &#x2F;&#x2F; 设置请求域名地址</span><br><span class="line">  timeout: 1000 * 60 * 10, &#x2F;&#x2F; 设置请求超时时间</span><br><span class="line">  responseType: &#39;json&#39; &#x2F;&#x2F; 设置返回值类型</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 然后使用Axios实例的adapter进行封装微信请求</span><br><span class="line">Axios.defaults.adapter &#x3D; (config) &#x3D;&gt; &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    let data &#x3D; config.method &#x3D;&#x3D;&#x3D; &#39;get&#39; ? config.params : qs.stringify(config.params)</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      url: config.url,</span><br><span class="line">      method: config.method,</span><br><span class="line">      header: &#123;&#39;Content-type&#39;: &#39;application&#x2F;x-www-form-urlencoded&#39;&#125;,</span><br><span class="line">      data,</span><br><span class="line">      success: (res) &#x3D;&gt; (resolve(res)),</span><br><span class="line">      fail: (err) &#x3D;&gt; (reject(err))</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 请求拦截</span><br><span class="line">Axios.interceptors.request.use((request) &#x3D;&gt; &#123;</span><br><span class="line">  return request</span><br><span class="line">&#125;, (error) &#x3D;&gt; &#123;</span><br><span class="line">  return Promise.reject(error)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 响应拦截</span><br><span class="line">Axios.interceptors.response.use((response) &#x3D;&gt; &#123;</span><br><span class="line">    return response</span><br><span class="line">&#125;, (error) &#x3D;&gt; &#123;</span><br><span class="line">     return Promise.reject(error)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 导出响应的方法</span><br><span class="line">export function fetch (options) &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    Axios(options)</span><br><span class="line">      .then(response &#x3D;&gt; &#123;</span><br><span class="line">        resolve(response)</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(error &#x3D;&gt; &#123;</span><br><span class="line">        reject(error)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>相关自定义头部导航栏根据相关设备判断设置高度，相关计算是顶部状态栏的高度加上相关定义的高度。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;微信获取相关设备信息的API</span><br><span class="line">wx.getSystemInfo(&#123;</span><br><span class="line">  success (system) &#123;</span><br><span class="line">    &#x2F;&#x2F; console.log(&#96;system:&#96;, system)</span><br><span class="line">    self.statusBarHeight &#x3D; system.statusBarHeight</span><br><span class="line">    self.platform &#x3D; system.platform</span><br><span class="line">    const windowHeight &#x3D; system.windowHeight</span><br><span class="line">    let platformReg &#x3D; &#x2F;ios&#x2F;i</span><br><span class="line">    if (platformReg.test(system.platform)) &#123;</span><br><span class="line">      self.titleBarHeight &#x3D; 44  &#x2F;&#x2F; iso的高度</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      self.titleBarHeight &#x3D; 48  &#x2F;&#x2F;android 的高度</span><br><span class="line">    &#125;</span><br><span class="line">    self.navBarHeight &#x3D; self.statusBarHeight + self.titleBarHeight</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>mpvue中使用组件式封装 然后是内容使用插槽形式，在使用组件的使用插槽内的内容数据更新页面不会实时更新 。（父组件插槽内容块中使用的也是组件封装的组件）（问题1）。然后我使用了 不封装组件 直接写页面样式点击组件的事件会触发插槽中的事件？？？（问题2） 事件跟插槽中的事件不在同一个div中。最后就是不用插槽才解决了上述问题1，2</p>
+</li>
+<li><p><code>npm run dev</code> 会卡在<code>node build/dev-server.js wx</code> 最后我自己也是在官方的github仓库中的<code>issu</code>中找到解决方案在build文件夹的<code>build.js</code>中<code>require(&#39;./check-versions&#39;)()</code>注释掉然后也就能正常运行了。具体的好像是在经过<code>check-versions</code>函数的时候执行特别的慢。</p>
+</li>
+</ol>
+<p>&#160; &#160; &#160; &#160;最后总结下<code>MpVue</code>这个相对于<code>vue</code>针对于小程序的框架，大部分都是使用<code>vue</code>相关语法所以对于熟悉<code>vue</code>的来说还是很容易上手的。开发效率也还可以。感觉会使用<code>vue</code>再次熟悉微信小程序官方的API开发效率还是很高的，不过还是有挺多坑的，我这边坑可能是没有遇到很多。很幸运，具体的相关的语法情况可以对应官方网站的介绍情况。</p>
+<p>&#160; &#160; &#160; &#160;最后附上相关网站地址：</p>
+<p>&#160; &#160; &#160; &#160;官方网站：<a href="http://mpvue.com" target="_blank" rel="noopener">http://mpvue.com</a></p>
+<p>&#160; &#160; &#160; &#160;github相关仓库地址： <a href="https://github.com/Meituan-Dianping/mpvue" target="_blank" rel="noopener">https://github.com/Meituan-Dianping/mpvue</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://jetbn.github.io/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" title="mpvue入坑记录" target="_blank" rel="external">http://jetbn.github.io/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jetBn" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jetBn" target="_blank"><span class="text-dark">陈文东</span><small class="ml-1x">Web前端开发工程师</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" title="Shopify插件开发入坑体验"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jetBn" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Shopify插件开发入坑体验 | 博客</title>
+  <meta name="description" content="前言&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;由于公司的需求开发Shopify的应用插件自己特地记录下。简单的介绍下Shopify,它是由托比亚斯·卢克创办的加拿大电子商务软件开发商，总部位于加拿大首都渥太华，其提供的服务软件Shopify是一个SaaS领域的购物车系统，适合跨境电商建立独立站，用户支付一定费用即可在其上利用各种主题&#x2F;模板建立自己的网上商店。 &amp;ensp;&amp;ensp;&amp;en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shopify插件开发入坑体验">
+<meta property="og:url" content="http://jetbn.github.io/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;由于公司的需求开发Shopify的应用插件自己特地记录下。简单的介绍下Shopify,它是由托比亚斯·卢克创办的加拿大电子商务软件开发商，总部位于加拿大首都渥太华，其提供的服务软件Shopify是一个SaaS领域的购物车系统，适合跨境电商建立独立站，用户支付一定费用即可在其上利用各种主题&#x2F;模板建立自己的网上商店。 &amp;ensp;&amp;ensp;&amp;en">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16facfbcc2c3ad20?w=500&h=144&f=png&s=18435">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16fadd29cd892624?w=1477&h=599&f=png&s=141044">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16fadd983d275ceb?w=1579&h=744&f=jpeg&s=164230">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16faddc034ed8c10?w=965&h=849&f=png&s=60560">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16fade6ef2e35432?w=496&h=355&f=png&s=19659">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/17/16fb29415dbff038?w=976&h=519&f=png&s=30962">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/17/16fb2a914762cace?w=434&h=214&f=png&s=6256">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/17/16fb2af2f6b051c0?w=1317&h=551&f=png&s=32089">
+<meta property="article:published_time" content="2020-04-29T02:58:15.000Z">
+<meta property="article:modified_time" content="2020-04-29T02:58:21.115Z">
+<meta property="article:author" content="jetBn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16facfbcc2c3ad20?w=500&h=144&f=png&s=18435">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://jetbn.github.io/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/jetBn" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈文东</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web前端开发工程师</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 杭州, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jetBn" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/Vue3-0%E5%B0%9D%E8%AF%95/" class="title">Vue3.0尝试</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:59:17.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" class="title">Shopify插件开发入坑体验</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:58:15.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" class="title">mpvue入坑记录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:57:09.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Shopify插件开发入坑体验" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Shopify插件开发入坑体验
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" class="article-date">
+	  <time datetime="2020-04-29T02:58:15.000Z" itemprop="datePublished">2020-04-29</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><img src="https://user-gold-cdn.xitu.io/2020/1/16/16facfbcc2c3ad20?w=500&h=144&f=png&s=18435" alt=""></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&ensp;&ensp;&ensp;&ensp;由于公司的需求开发<code>Shopify</code>的应用插件自己特地记录下。简单的介绍下<code>Shopify</code>,它是由托比亚斯·卢克创办的加拿大电子商务软件开发商，总部位于加拿大首都渥太华，其提供的服务软件<code>Shopify</code>是一个<code>SaaS</code>领域的购物车系统，适合跨境电商建立独立站，用户支付一定费用即可在其上利用各种主题/模板建立自己的网上商店。</p>
+<p>&ensp;&ensp;&ensp;&ensp;由于是国外的官网文档也都是英文，看起来有点吃力哦（小生英文水平有限🤣🤣）。不过之后应该有中文了现在很多页面有中文了已经。</p>
+<p>&ensp;&ensp;&ensp;&ensp;该应该用插件官方推荐是用<code>React</code>的<code>next.js</code>服务端渲染框架以及<code>node.js</code>作为后端语言使用<code>GraphQL</code>开发。作为没接触过<code>GraphQL</code>的我赶紧补了一波知识。后来我一路跌跌撞撞终于现在是了解了一个大概。最终我还是使用<code>node</code>作为主入口程序，验证应用插件获取相关的<code>access_token</code>和商店地址。剩下的请求什么<code>Shopify</code>接口也没有用<code>GraphQL</code>而是使用了<code>ResfulApi</code>让后端工作人员去操作了，然后我请求后端接口进行一系列操作。（最后熟悉了，什么验证都是丢给后端操作了，前端我也就可以使用各种框架了而不是单单只能使用<code>next.js</code>）。</p>
+<h2 id="注册获取开发前提要素"><a href="#注册获取开发前提要素" class="headerlink" title="注册获取开发前提要素"></a>注册获取开发前提要素</h2><ol>
+<li>创建<code>Shopify</code>开发者账号<br><img src="https://user-gold-cdn.xitu.io/2020/1/16/16fadd29cd892624?w=1477&h=599&f=png&s=141044" alt=""><br>如图在<a href="https://developers.shopify.com/" target="_blank" rel="noopener">https://developers.shopify.com/</a>网站注册相关的账号。</li>
+<li>在相关<code>partners</code>的页面创建商店(以供后面开发应用使用)以及应用<br><img src="https://user-gold-cdn.xitu.io/2020/1/16/16fadd983d275ceb?w=1579&h=744&f=jpeg&s=164230" alt=""><ol>
+<li>在创建应用的有自定义应用和公共应用如图：<br> <img src="https://user-gold-cdn.xitu.io/2020/1/16/16faddc034ed8c10?w=965&h=849&f=png&s=60560" alt=""><br> 一般我相信我我们都是创建的公共应用，到目前我开发的应用也都是公共类型，在创建应用的时候<code>URL</code>和相关的重定向<code>URL</code>都是必须写的因为我也没有注册域名啥的吧，所以此时是用了<code>ngrok</code>内网穿透，在官方的开发介绍中也是使用这个。在此我们填写的<code>URL</code>就要和你使用<code>ngrok</code>暴露出去的地址对应了，不过使用<code>node</code>的<code>koa</code>框架有个专门的中间件也是官方使用的重定向地址都是域名后加上了<code>shopify/auth</code> 例如：  URL:<code>https://30aca829.ngrok.io</code>, 重定向URL:<code>https://30aca829.ngrok.io/shopify/auth/</code>（电脑重启重新暴露出去这个连个地址都是要重新填一遍，然后<code>koa</code>的中间件就会跳转到<code>https://30aca829.ngrok.io/shopify/auth/</code>进行相关的验证操作。（这在后面的入口）。序中会上代码，然后在后期我们没有用<code>koa</code>作为入口这个地址也是可以自己想怎么填就怎么填）。</li>
+<li>创建完成（拿取相关的密钥很重要！！很重要！！作为开发读取数据和请求官方<code>api</code>使用）<br> <img src="https://user-gold-cdn.xitu.io/2020/1/16/16fade6ef2e35432?w=496&h=355&f=png&s=19659" alt=""><br> 差不多了前提就这些步骤，注册成功之后填写好接下来就是一系列代码操作了。</li>
+</ol>
+</li>
+</ol>
+<h2 id="编写开发环境程序"><a href="#编写开发环境程序" class="headerlink" title="编写开发环境程序"></a>编写开发环境程序</h2><ol>
+<li><p>创建项目目录（sample-app），并使用<code>npm</code>初始化项目目录 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure></li>
+<li><p>安装相关依赖</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react react-dom next</span><br></pre></td></tr></table></figure></li>
+<li><p>因为是用<code>next.js</code>所以不熟悉的还得看看官方文档 <a href="https://nextjs.frontendx.cn/" target="_blank" rel="noopener">https://nextjs.frontendx.cn/</a></p>
+<p> 创建文件<code>pages</code>并在下面新建<code>index.js</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const Index &#x3D; () &#x3D;&gt; (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;p&gt;Sample app using React and Next.js&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">export default Index;</span><br></pre></td></tr></table></figure>
+<p> 添加相关运行命令打开<code>package.json</code>文件添加</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;next&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;next build&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;next start&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 运行开发环境</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p> 到这里应该是创建一个<code>next.js</code>项目然后接下来对接到<code>Shopify</code></p>
+</li>
+<li><p>使用<code>ngrok</code>暴露出去自己的<code>3000</code>端口因为<code>next.js</code>启动的默认是<code>3000</code>端口</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngrok http 3000</span><br></pre></td></tr></table></figure>
+<p> <img src="https://user-gold-cdn.xitu.io/2020/1/17/16fb29415dbff038?w=976&h=519&f=png&s=30962" alt=""><br> 然后在自己创建的应用中设置中添加<code>对应的url</code>（得用<code>https</code>的）就在上面所说的填写<code>url</code></p>
+</li>
+<li><p>使用<code>node</code>的 <code>koa</code>来进行渲染页面操作</p>
+<ol>
+<li><p>创建<code>env</code>环境变量文件并写入在上面创建的应用的<code>KEY</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SHOPIFY_API_KEY&#x3D;&#39;YOUR API KEY FROM SHOPIFY PARTNERS DASHBOARD&#39;</span><br><span class="line">SHOPIFY_API_SECRET_KEY&#x3D;&#39;YOUR API SECRET KEY FROM SHOPIFY PARTNERS DASHBOARD&#39;</span><br></pre></td></tr></table></figure></li>
+<li><p>安装相关<code>Shopify</code>的验证<code>koa</code>中间件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save koa @shopify&#x2F;koa-shopify-auth dotenv koa-session isomorphic-fetch</span><br></pre></td></tr></table></figure></li>
+<li><p>创建<code>server.js</code>写入相关验证代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">require(&#39;isomorphic-fetch&#39;);</span><br><span class="line">const dotenv &#x3D; require(&#39;dotenv&#39;);</span><br><span class="line">const Koa &#x3D; require(&#39;koa&#39;);</span><br><span class="line">const next &#x3D; require(&#39;next&#39;);</span><br><span class="line">const &#123; default: createShopifyAuth &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-auth&#39;);</span><br><span class="line">const &#123; verifyRequest &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-auth&#39;);</span><br><span class="line">const session &#x3D; require(&#39;koa-session&#39;);</span><br><span class="line"></span><br><span class="line">dotenv.config();</span><br><span class="line">&#x2F;&#x2F; graphql的相关中间件</span><br><span class="line">const &#123; default: graphQLProxy &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-graphql-proxy&#39;); </span><br><span class="line">const &#123; ApiVersion &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-graphql-proxy&#39;);</span><br><span class="line"></span><br><span class="line">const port &#x3D; parseInt(process.env.PORT, 10) || 3000;</span><br><span class="line">const dev &#x3D; process.env.NODE_ENV !&#x3D;&#x3D; &#39;production&#39;;</span><br><span class="line">const app &#x3D; next(&#123; dev &#125;);</span><br><span class="line">const handle &#x3D; app.getRequestHandler();</span><br><span class="line"></span><br><span class="line">const &#123; SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY &#125; &#x3D; process.env; &#x2F;&#x2F; 环境变量里读取 api-key与api-secret-key</span><br><span class="line">app.prepare().then(() &#x3D;&gt; &#123;</span><br><span class="line">  const server &#x3D; new Koa();</span><br><span class="line">  server.use(session(server));</span><br><span class="line">  server.keys &#x3D; [SHOPIFY_API_SECRET_KEY];</span><br><span class="line"></span><br><span class="line">  server.use(</span><br><span class="line">    createShopifyAuth(&#123;</span><br><span class="line">      apiKey: SHOPIFY_API_KEY,</span><br><span class="line">      secret: SHOPIFY_API_SECRET_KEY, </span><br><span class="line">      scopes: [&#39;read_products&#39;, &#39;write_products&#39;], &#x2F;&#x2F;填写相关应用api相关请求的权限</span><br><span class="line">      afterAuth(ctx) &#123;</span><br><span class="line">        const &#123; shop, accessToken &#125; &#x3D; ctx.session; &#x2F;&#x2F; 通过session拿取相关商店地址以及请求api需要的accessToken</span><br><span class="line">        ctx.cookies.set(&#39;shopOrigin&#39;, shop, &#123; httpOnly: false &#125;); </span><br><span class="line">        ctx.redirect(&#39;&#x2F;&#39;); &#x2F;&#x2F; 重定向到index首页</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  server.use(verifyRequest());</span><br><span class="line">  server.use(async (ctx) &#x3D;&gt; &#123;</span><br><span class="line">    await handle(ctx.req, ctx.res);</span><br><span class="line">    ctx.respond &#x3D; false;</span><br><span class="line">    ctx.res.statusCode &#x3D; 200;</span><br><span class="line">    return</span><br><span class="line">  &#125;);</span><br><span class="line">  server.use(graphQLProxy(&#123;version: ApiVersion.October19&#125;)) &#x2F;&#x2F; 这里填写相关api的版本</span><br><span class="line"></span><br><span class="line">  server.listen(port, () &#x3D;&gt; &#123;</span><br><span class="line">    console.log(&#96;&gt; Ready on http:&#x2F;&#x2F;localhost:$&#123;port&#125;&#96;); &#x2F;&#x2F; 监听端口</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>修改<code>package.json</code>文件使用我们的<code>server.js</code>来启动项目</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;node server.js&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;NODE_ENV&#x3D;production node server.js&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;next build&quot;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 现在我们启动项目并且用<code>ngrok</code>暴露出去的域名就能看到</p>
+<p> <img src="https://user-gold-cdn.xitu.io/2020/1/17/16fb2a914762cace?w=434&h=214&f=png&s=6256" alt=""><br> 这里还要在域名的<code>shop</code>填写我们的商店地址例如我自己的：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;e44132cd.ngrok.io&#x2F;auth&#x2F;inline?shop&#x3D;jetbn.myshopify.com</span><br></pre></td></tr></table></figure>
+<p> 一切填写就绪之后一<code>enter</code>页面就自动跳转了。</p>
+<p> 最后展示的页面：<br> <img src="https://user-gold-cdn.xitu.io/2020/1/17/16fb2af2f6b051c0?w=1317&h=551&f=png&s=32089" alt=""></p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="折腾其他框架尝试"><a href="#折腾其他框架尝试" class="headerlink" title="折腾其他框架尝试"></a>折腾其他框架尝试</h2><p>&ensp;&ensp;&ensp;&ensp;前前后后都是使用<code>React</code>的<code>next.js</code>开发了两三个应用，感觉就是开发的时候太麻烦了，总要内网穿透，而且展示的页面都是<code>Shopify</code>的的自己平台上，而且开发写完代码等它响应过来还很慢。就这原因我又开始折腾了寻求其他的方案看看有没有能在自己开发完了再到它那上面，而且让验证<code>Shopify</code>的一系列操作让我们的后端小哥来操作。最终我前端选择<code>Vue</code>并且验证都放后端了，这样我就能像平常开发<code>Vue</code>项一样了。</p>
+<p>下面介绍下我纯前端进行<code>Shopify</code>的验证操作使用<code>vue</code>。（前提要素内网穿透，不过开发的时候不需要）</p>
+<ol>
+<li><p>添加安装应用路由</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   path: &#39;&#x2F;shopify&#x2F;install&#39;,</span><br><span class="line">   beforeEnter(to, _from, next) &#123;</span><br><span class="line">     if (to.query.shop) &#123;  &#x2F;&#x2F;要在域名后添加开发的商店地址</span><br><span class="line">         const shop &#x3D; to.query.shop,</span><br><span class="line">         scopes &#x3D; &#39;read_orders,read_products,write_products&#39;, &#x2F;&#x2F; api权限</span><br><span class="line">         &#x2F;&#x2F; 重定向地址就是在创建应用的时候填写的第二个（重定向URL可以自己随意写了），我这里是域名加&#x2F;shopify&#x2F;auth</span><br><span class="line">         redirect_uri &#x3D; &#39;https:&#x2F;&#x2F;&#39; + process.env.VUE_APP_ROOT_URL + &#39;&#x2F;shopify&#x2F;auth&#39;, </span><br><span class="line">         &#x2F;&#x2F; 拼接安装应用地址需要SHOPIFY_API_KEY我填写在我的.env文件中了</span><br><span class="line">         install_url &#x3D;</span><br><span class="line">               &#39;http:&#x2F;&#x2F;&#39; + shop + &#39;&#x2F;admin&#x2F;oauth&#x2F;authorize?client_id&#x3D;&#39; +</span><br><span class="line">               process.env.VUE_APP_SHOPIFY_API_KEY +</span><br><span class="line">               &#39;&amp;scope&#x3D;&#39; + scopes + &#39;&amp;redirect_uri&#x3D;&#39; + redirect_uri</span><br><span class="line">       &#x2F;&#x2F; 本地跳转安装地址</span><br><span class="line">       window.location &#x3D; install_url</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">       next(&#123; path: &#39;&#x2F;error&#39; &#125;)</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重定向验证路由</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: &#39;&#x2F;shopify&#x2F;auth&#39;,</span><br><span class="line">  beforeEnter(to, _from, next) &#123;</span><br><span class="line">  &#x2F;&#x2F; 通过回调的url获取相关的参数</span><br><span class="line">    const shop &#x3D; to.query.shop,</span><br><span class="line">      hmac &#x3D; to.query.hmac,</span><br><span class="line">      code &#x3D; to.query.code</span><br><span class="line">  &#x2F;&#x2F; 使用SHOPIFY_API_SECRET_KEY验证 并且之后拿取access_token（这步没写）</span><br><span class="line">    if (shop &amp;&amp; hmac &amp;&amp; code) &#123;</span><br><span class="line">      const map &#x3D; Object.assign(&#123;&#125;, to.query)</span><br><span class="line">      delete map[&#39;signature&#39;]</span><br><span class="line">      delete map[&#39;hmac&#39;]</span><br><span class="line">      const message &#x3D; querystring.stringify(map)</span><br><span class="line">      const encrypted &#x3D;</span><br><span class="line">        crypto.createHmac(&#39;sha256&#39;, process.env.VUE_APP_SHOPIFY_API_SECRET_KEY)</span><br><span class="line">              .update(message)</span><br><span class="line">              .digest(&#39;hex&#39;)</span><br><span class="line">      &#x2F;&#x2F; const providedHmac &#x3D;  Buffer.from(hmac, &#39;utf-8&#39;)</span><br><span class="line">      &#x2F;&#x2F; const generatedHash &#x3D; Buffer.from(encrypted, &#39;utf-8&#39;)</span><br><span class="line">    </span><br><span class="line">      let hashEquals &#x3D; false</span><br><span class="line">    </span><br><span class="line">      try &#123;</span><br><span class="line">        &#x2F;&#x2F; later: Auth fails with &#96;crypto.timingSafeEqual&#96;</span><br><span class="line">        &#x2F;&#x2F; hashEquals &#x3D; crypto.timingSafeEqual(generatedHash, providedHmac)</span><br><span class="line">        hashEquals &#x3D; hmac &#x3D;&#x3D;&#x3D; encrypted</span><br><span class="line">      &#125; catch (e) &#123;</span><br><span class="line">        hashEquals &#x3D; false</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">      if (!hashEquals) &#123;</span><br><span class="line">        next(&#123; path: &#39;&#x2F;error&#39; &#125;)</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        next(&#39;&#x2F;&#39;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      next(&#123; path: &#39;&#x2F;error&#39; &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>Vue</code>这相关的验证方案也是从<code>Github</code>上面捞的，特地记录下。具体地址忘了，有需要自己可以搜搜。🤣</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&ensp;&ensp;&ensp;&ensp;经过一段时间的熟悉，自己也算又掌握一项新东西了。刚开始这个<code>Shopify</code>插件应用开发真的是巨坑啊，虽然官方有文档流程，但是都是英文的而且基础的搭建都是<code>api</code>都是用<code>GraphQL</code>然后我自己尝试了都是各种超时操作，请求不到最后就自己弃用了，用<code>ResfulApi</code>。然后就是遇到问题啊啥的都跟本搜不到，我想着这也太难了我，然后只能硬着头皮去官方文档里找，最后到现在也算是起起伏伏终于都熟悉了，搞懂了。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这之后发现了英文水平太重要了。虽然开发文档基本内容能看懂，但是都是半猜半疑的，然后翻译一波。（各种不准确），然后开始补英文吧。🤞</p>
+<p>&ensp;&ensp;&ensp;&ensp;  最后放上几个<code>Shopify</code>开发常用的官方文档地址：</p>
+<p>&ensp;&ensp;&ensp;&ensp;Shopify Partners(创建应用查看应用):  <a href="https://vue-composition-api-rfc.netlify.com" target="_blank" rel="noopener">https://vue-composition-api-rfc.netlify.com</a></p>
+<p>&ensp;&ensp;&ensp;&ensp;Shopify Developers(官方开发文档):   <a href="https://developers.shopify.com" target="_blank" rel="noopener">https://developers.shopify.com</a>（搭建参考文档）</p>
+<p>&ensp;&ensp;&ensp;&ensp;Shopify Polaris(官方UI框架):   <a href="https://polaris.shopify.com" target="_blank" rel="noopener">https://developers.shopify.com</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://jetbn.github.io/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" title="Shopify插件开发入坑体验" target="_blank" rel="external">http://jetbn.github.io/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jetBn" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jetBn" target="_blank"><span class="text-dark">陈文东</span><small class="ml-1x">Web前端开发工程师</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/29/Vue3-0%E5%B0%9D%E8%AF%95/" title="Vue3.0尝试"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" title="mpvue入坑记录"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jetBn" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
