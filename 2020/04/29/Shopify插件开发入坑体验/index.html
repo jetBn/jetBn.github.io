@@ -30,12 +30,12 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16fadd983d275ceb?w=1579&h=744&f=jpeg&s=164230">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16faddc034ed8c10?w=965&h=849&f=png&s=60560">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16fade6ef2e35432?w=496&h=355&f=png&s=19659">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/17/16fb29415dbff038?w=976&h=519&f=png&s=30962">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/17/16fb2a914762cace?w=434&h=214&f=png&s=6256">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/17/16fb2af2f6b051c0?w=1317&h=551&f=png&s=32089">
 <meta property="article:published_time" content="2020-04-29T02:58:15.000Z">
-<meta property="article:modified_time" content="2020-04-29T04:15:37.377Z">
+<meta property="article:modified_time" content="2020-04-30T02:39:34.782Z">
 <meta property="article:author" content="jetBn">
+<meta property="article:tag" content="Shopify">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Next.js">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/1/16/16facfbcc2c3ad20?w=500&h=144&f=png&s=18435">
   <!-- Canonical links -->
@@ -53,6 +53,7 @@
   
   
   
+  <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/10.0.0/styles/atom-one-light.min.css">
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 
@@ -220,9 +221,23 @@
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Next-js/" rel="tag">Next.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shopify/" rel="tag">Shopify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Next-js/" style="font-size: 13px;">Next.js</a> <a href="/tags/React/" style="font-size: 13px;">React</a> <a href="/tags/Shopify/" style="font-size: 13px;">Shopify</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a>
+    </div>
+  </div>
+
     
       
   <div class="widget">
@@ -324,6 +339,11 @@
   </span>
 
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Next-js/" rel="tag">Next.js</a>, <a class="article-tag-link" href="/tags/React/" rel="tag">React</a>, <a class="article-tag-link" href="/tags/Shopify/" rel="tag">Shopify</a>
+  </span>
+
 
         
 
@@ -347,54 +367,147 @@
 </ol>
 <h2 id="编写开发环境程序"><a href="#编写开发环境程序" class="headerlink" title="编写开发环境程序"></a>编写开发环境程序</h2><ol>
 <li><p>创建项目目录（sample-app），并使用<code>npm</code>初始化项目目录 </p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">npm init -y<br></code></pre></td></tr></table></figure></li>
 <li><p>安装相关依赖</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react react-dom next</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">npm install --save react react-dom next<br></code></pre></td></tr></table></figure></li>
 <li><p>因为是用<code>next.js</code>所以不熟悉的还得看看官方文档 <a href="https://nextjs.frontendx.cn/" target="_blank" rel="noopener">https://nextjs.frontendx.cn/</a></p>
 <p> 创建文件<code>pages</code>并在下面新建<code>index.js</code></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const Index &#x3D; () &#x3D;&gt; (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;p&gt;Sample app using React and Next.js&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">export default Index;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">const Index &#x3D; () &#x3D;&gt; (<br>  &lt;div&gt;<br>    &lt;p&gt;Sample app using React and Next.js&lt;&#x2F;p&gt;<br>  &lt;&#x2F;div&gt;<br>);<br><br>export default Index;<br></code></pre></td></tr></table></figure>
 <p> 添加相关运行命令打开<code>package.json</code>文件添加</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;next&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;next build&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;next start&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#123;<br>  &quot;scripts&quot;: &#123;<br>    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,<br>    &quot;dev&quot;: &quot;next&quot;,<br>    &quot;build&quot;: &quot;next build&quot;,<br>    &quot;start&quot;: &quot;next start&quot;<br>  &#125;<br>&#125;<br>&#96;&#96;&#96; <br><br>运行开发环境<br></code></pre></td></tr></table></figure>
+<p> npm run dev</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">    <br>    到这里应该是创建一个&#96;next.js&#96;项目然后接下来对接到&#96;Shopify&#96;<br>4. 使用&#96;ngrok&#96;暴露出去自己的&#96;3000&#96;端口因为&#96;next.js&#96;启动的默认是&#96;3000&#96;端口<br></code></pre></td></tr></table></figure>
+<p> ngrok http 3000</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">    ![](https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2020&#x2F;1&#x2F;17&#x2F;16fb29415dbff038?w&#x3D;976&amp;h&#x3D;519&amp;f&#x3D;png&amp;s&#x3D;30962)<br>    然后在自己创建的应用中设置中添加&#96;对应的url&#96;（得用&#96;https&#96;的）就在上面所说的填写&#96;url&#96;<br>    <br>5.  使用&#96;node&#96;的 &#96;koa&#96;来进行渲染页面操作<br>    1. 创建&#96;env&#96;环境变量文件并写入在上面创建的应用的&#96;KEY&#96;<br></code></pre></td></tr></table></figure>
+<pre><code>SHOPIFY_API_KEY=&apos;YOUR API KEY FROM SHOPIFY PARTNERS DASHBOARD&apos;
+SHOPIFY_API_SECRET_KEY=&apos;YOUR API SECRET KEY FROM SHOPIFY PARTNERS DASHBOARD&apos;
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">2. 安装相关&#96;Shopify&#96;的验证&#96;koa&#96;中间件<br></code></pre></td></tr></table></figure>
+npm install --save koa @shopify/koa-shopify-auth dotenv koa-session isomorphic-fetch
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">3. 创建&#96;server.js&#96;写入相关验证代码<br></code></pre></td></tr></table></figure>
+require(&apos;isomorphic-fetch&apos;);
+const dotenv = require(&apos;dotenv&apos;);
+const Koa = require(&apos;koa&apos;);
+const next = require(&apos;next&apos;);
+const { default: createShopifyAuth } = require(&apos;@shopify/koa-shopify-auth&apos;);
+const { verifyRequest } = require(&apos;@shopify/koa-shopify-auth&apos;);
+const session = require(&apos;koa-session&apos;);
 
-<p> 运行开发环境</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+dotenv.config();
+// graphql的相关中间件
+const { default: graphQLProxy } = require(&apos;@shopify/koa-shopify-graphql-proxy&apos;); 
+const { ApiVersion } = require(&apos;@shopify/koa-shopify-graphql-proxy&apos;);
 
-<p> 到这里应该是创建一个<code>next.js</code>项目然后接下来对接到<code>Shopify</code></p>
-</li>
-<li><p>使用<code>ngrok</code>暴露出去自己的<code>3000</code>端口因为<code>next.js</code>启动的默认是<code>3000</code>端口</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngrok http 3000</span><br></pre></td></tr></table></figure>
-<p> <img src="https://user-gold-cdn.xitu.io/2020/1/17/16fb29415dbff038?w=976&h=519&f=png&s=30962" alt=""><br> 然后在自己创建的应用中设置中添加<code>对应的url</code>（得用<code>https</code>的）就在上面所说的填写<code>url</code></p>
-</li>
-<li><p>使用<code>node</code>的 <code>koa</code>来进行渲染页面操作</p>
-<ol>
-<li><p>创建<code>env</code>环境变量文件并写入在上面创建的应用的<code>KEY</code></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SHOPIFY_API_KEY&#x3D;&#39;YOUR API KEY FROM SHOPIFY PARTNERS DASHBOARD&#39;</span><br><span class="line">SHOPIFY_API_SECRET_KEY&#x3D;&#39;YOUR API SECRET KEY FROM SHOPIFY PARTNERS DASHBOARD&#39;</span><br></pre></td></tr></table></figure></li>
-<li><p>安装相关<code>Shopify</code>的验证<code>koa</code>中间件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save koa @shopify&#x2F;koa-shopify-auth dotenv koa-session isomorphic-fetch</span><br></pre></td></tr></table></figure></li>
-<li><p>创建<code>server.js</code>写入相关验证代码</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">require(&#39;isomorphic-fetch&#39;);</span><br><span class="line">const dotenv &#x3D; require(&#39;dotenv&#39;);</span><br><span class="line">const Koa &#x3D; require(&#39;koa&#39;);</span><br><span class="line">const next &#x3D; require(&#39;next&#39;);</span><br><span class="line">const &#123; default: createShopifyAuth &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-auth&#39;);</span><br><span class="line">const &#123; verifyRequest &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-auth&#39;);</span><br><span class="line">const session &#x3D; require(&#39;koa-session&#39;);</span><br><span class="line"></span><br><span class="line">dotenv.config();</span><br><span class="line">&#x2F;&#x2F; graphql的相关中间件</span><br><span class="line">const &#123; default: graphQLProxy &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-graphql-proxy&#39;); </span><br><span class="line">const &#123; ApiVersion &#125; &#x3D; require(&#39;@shopify&#x2F;koa-shopify-graphql-proxy&#39;);</span><br><span class="line"></span><br><span class="line">const port &#x3D; parseInt(process.env.PORT, 10) || 3000;</span><br><span class="line">const dev &#x3D; process.env.NODE_ENV !&#x3D;&#x3D; &#39;production&#39;;</span><br><span class="line">const app &#x3D; next(&#123; dev &#125;);</span><br><span class="line">const handle &#x3D; app.getRequestHandler();</span><br><span class="line"></span><br><span class="line">const &#123; SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY &#125; &#x3D; process.env; &#x2F;&#x2F; 环境变量里读取 api-key与api-secret-key</span><br><span class="line">app.prepare().then(() &#x3D;&gt; &#123;</span><br><span class="line">  const server &#x3D; new Koa();</span><br><span class="line">  server.use(session(server));</span><br><span class="line">  server.keys &#x3D; [SHOPIFY_API_SECRET_KEY];</span><br><span class="line"></span><br><span class="line">  server.use(</span><br><span class="line">    createShopifyAuth(&#123;</span><br><span class="line">      apiKey: SHOPIFY_API_KEY,</span><br><span class="line">      secret: SHOPIFY_API_SECRET_KEY, </span><br><span class="line">      scopes: [&#39;read_products&#39;, &#39;write_products&#39;], &#x2F;&#x2F;填写相关应用api相关请求的权限</span><br><span class="line">      afterAuth(ctx) &#123;</span><br><span class="line">        const &#123; shop, accessToken &#125; &#x3D; ctx.session; &#x2F;&#x2F; 通过session拿取相关商店地址以及请求api需要的accessToken</span><br><span class="line">        ctx.cookies.set(&#39;shopOrigin&#39;, shop, &#123; httpOnly: false &#125;); </span><br><span class="line">        ctx.redirect(&#39;&#x2F;&#39;); &#x2F;&#x2F; 重定向到index首页</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  server.use(verifyRequest());</span><br><span class="line">  server.use(async (ctx) &#x3D;&gt; &#123;</span><br><span class="line">    await handle(ctx.req, ctx.res);</span><br><span class="line">    ctx.respond &#x3D; false;</span><br><span class="line">    ctx.res.statusCode &#x3D; 200;</span><br><span class="line">    return</span><br><span class="line">  &#125;);</span><br><span class="line">  server.use(graphQLProxy(&#123;version: ApiVersion.October19&#125;)) &#x2F;&#x2F; 这里填写相关api的版本</span><br><span class="line"></span><br><span class="line">  server.listen(port, () &#x3D;&gt; &#123;</span><br><span class="line">    console.log(&#96;&gt; Ready on http:&#x2F;&#x2F;localhost:$&#123;port&#125;&#96;); &#x2F;&#x2F; 监听端口</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>修改<code>package.json</code>文件使用我们的<code>server.js</code>来启动项目</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;node server.js&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;NODE_ENV&#x3D;production node server.js&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;next build&quot;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 现在我们启动项目并且用<code>ngrok</code>暴露出去的域名就能看到</p>
-<p> <img src="https://user-gold-cdn.xitu.io/2020/1/17/16fb2a914762cace?w=434&h=214&f=png&s=6256" alt=""><br> 这里还要在域名的<code>shop</code>填写我们的商店地址例如我自己的：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;e44132cd.ngrok.io&#x2F;auth&#x2F;inline?shop&#x3D;jetbn.myshopify.com</span><br></pre></td></tr></table></figure>
-<p> 一切填写就绪之后一<code>enter</code>页面就自动跳转了。</p>
-<p> 最后展示的页面：<br> <img src="https://user-gold-cdn.xitu.io/2020/1/17/16fb2af2f6b051c0?w=1317&h=551&f=png&s=32089" alt=""></p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="折腾其他框架尝试"><a href="#折腾其他框架尝试" class="headerlink" title="折腾其他框架尝试"></a>折腾其他框架尝试</h2><p>&ensp;&ensp;&ensp;&ensp;前前后后都是使用<code>React</code>的<code>next.js</code>开发了两三个应用，感觉就是开发的时候太麻烦了，总要内网穿透，而且展示的页面都是<code>Shopify</code>的的自己平台上，而且开发写完代码等它响应过来还很慢。就这原因我又开始折腾了寻求其他的方案看看有没有能在自己开发完了再到它那上面，而且让验证<code>Shopify</code>的一系列操作让我们的后端小哥来操作。最终我前端选择<code>Vue</code>并且验证都放后端了，这样我就能像平常开发<code>Vue</code>项一样了。</p>
-<p>下面介绍下我纯前端进行<code>Shopify</code>的验证操作使用<code>vue</code>。（前提要素内网穿透，不过开发的时候不需要）</p>
-<ol>
-<li><p>添加安装应用路由</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   path: &#39;&#x2F;shopify&#x2F;install&#39;,</span><br><span class="line">   beforeEnter(to, _from, next) &#123;</span><br><span class="line">     if (to.query.shop) &#123;  &#x2F;&#x2F;要在域名后添加开发的商店地址</span><br><span class="line">         const shop &#x3D; to.query.shop,</span><br><span class="line">         scopes &#x3D; &#39;read_orders,read_products,write_products&#39;, &#x2F;&#x2F; api权限</span><br><span class="line">         &#x2F;&#x2F; 重定向地址就是在创建应用的时候填写的第二个（重定向URL可以自己随意写了），我这里是域名加&#x2F;shopify&#x2F;auth</span><br><span class="line">         redirect_uri &#x3D; &#39;https:&#x2F;&#x2F;&#39; + process.env.VUE_APP_ROOT_URL + &#39;&#x2F;shopify&#x2F;auth&#39;, </span><br><span class="line">         &#x2F;&#x2F; 拼接安装应用地址需要SHOPIFY_API_KEY我填写在我的.env文件中了</span><br><span class="line">         install_url &#x3D;</span><br><span class="line">               &#39;http:&#x2F;&#x2F;&#39; + shop + &#39;&#x2F;admin&#x2F;oauth&#x2F;authorize?client_id&#x3D;&#39; +</span><br><span class="line">               process.env.VUE_APP_SHOPIFY_API_KEY +</span><br><span class="line">               &#39;&amp;scope&#x3D;&#39; + scopes + &#39;&amp;redirect_uri&#x3D;&#39; + redirect_uri</span><br><span class="line">       &#x2F;&#x2F; 本地跳转安装地址</span><br><span class="line">       window.location &#x3D; install_url</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">       next(&#123; path: &#39;&#x2F;error&#39; &#125;)</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重定向验证路由</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: &#39;&#x2F;shopify&#x2F;auth&#39;,</span><br><span class="line">  beforeEnter(to, _from, next) &#123;</span><br><span class="line">  &#x2F;&#x2F; 通过回调的url获取相关的参数</span><br><span class="line">    const shop &#x3D; to.query.shop,</span><br><span class="line">      hmac &#x3D; to.query.hmac,</span><br><span class="line">      code &#x3D; to.query.code</span><br><span class="line">  &#x2F;&#x2F; 使用SHOPIFY_API_SECRET_KEY验证 并且之后拿取access_token（这步没写）</span><br><span class="line">    if (shop &amp;&amp; hmac &amp;&amp; code) &#123;</span><br><span class="line">      const map &#x3D; Object.assign(&#123;&#125;, to.query)</span><br><span class="line">      delete map[&#39;signature&#39;]</span><br><span class="line">      delete map[&#39;hmac&#39;]</span><br><span class="line">      const message &#x3D; querystring.stringify(map)</span><br><span class="line">      const encrypted &#x3D;</span><br><span class="line">        crypto.createHmac(&#39;sha256&#39;, process.env.VUE_APP_SHOPIFY_API_SECRET_KEY)</span><br><span class="line">              .update(message)</span><br><span class="line">              .digest(&#39;hex&#39;)</span><br><span class="line">      &#x2F;&#x2F; const providedHmac &#x3D;  Buffer.from(hmac, &#39;utf-8&#39;)</span><br><span class="line">      &#x2F;&#x2F; const generatedHash &#x3D; Buffer.from(encrypted, &#39;utf-8&#39;)</span><br><span class="line">    </span><br><span class="line">      let hashEquals &#x3D; false</span><br><span class="line">    </span><br><span class="line">      try &#123;</span><br><span class="line">        &#x2F;&#x2F; later: Auth fails with &#96;crypto.timingSafeEqual&#96;</span><br><span class="line">        &#x2F;&#x2F; hashEquals &#x3D; crypto.timingSafeEqual(generatedHash, providedHmac)</span><br><span class="line">        hashEquals &#x3D; hmac &#x3D;&#x3D;&#x3D; encrypted</span><br><span class="line">      &#125; catch (e) &#123;</span><br><span class="line">        hashEquals &#x3D; false</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">      if (!hashEquals) &#123;</span><br><span class="line">        next(&#123; path: &#39;&#x2F;error&#39; &#125;)</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        next(&#39;&#x2F;&#39;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      next(&#123; path: &#39;&#x2F;error&#39; &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== &apos;production&apos;;
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-<p> <code>Vue</code>这相关的验证方案也是从<code>Github</code>上面捞的，特地记录下。具体地址忘了，有需要自己可以搜搜。🤣</p>
-</li>
+const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env; // 环境变量里读取 api-key与api-secret-key
+app.prepare().then(() =&gt; {
+  const server = new Koa();
+  server.use(session(server));
+  server.keys = [SHOPIFY_API_SECRET_KEY];
+
+  server.use(
+    createShopifyAuth({
+      apiKey: SHOPIFY_API_KEY,
+      secret: SHOPIFY_API_SECRET_KEY, 
+      scopes: [&apos;read_products&apos;, &apos;write_products&apos;], //填写相关应用api相关请求的权限
+      afterAuth(ctx) {
+        const { shop, accessToken } = ctx.session; // 通过session拿取相关商店地址以及请求api需要的accessToken
+        ctx.cookies.set(&apos;shopOrigin&apos;, shop, { httpOnly: false }); 
+        ctx.redirect(&apos;/&apos;); // 重定向到index首页
+      },
+    }),
+  );
+
+  server.use(verifyRequest());
+  server.use(async (ctx) =&gt; {
+    await handle(ctx.req, ctx.res);
+    ctx.respond = false;
+    ctx.res.statusCode = 200;
+    return
+  });
+  server.use(graphQLProxy({version: ApiVersion.October19})) // 这里填写相关api的版本
+
+  server.listen(port, () =&gt; {
+    console.log(`&gt; Ready on http://localhost:${port}`); // 监听端口
+  });
+});
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">4. 修改&#96;package.json&#96;文件使用我们的&#96;server.js&#96;来启动项目<br></code></pre></td></tr></table></figure>
+{
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;dev&quot;: &quot;node server.js&quot;,
+    &quot;start&quot;: &quot;NODE_ENV=production node server.js&quot;,
+    &quot;build&quot;: &quot;next build&quot;,
+  }
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">现在我们启动项目并且用&#96;ngrok&#96;暴露出去的域名就能看到<br><br>![](https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2020&#x2F;1&#x2F;17&#x2F;16fb2a914762cace?w&#x3D;434&amp;h&#x3D;214&amp;f&#x3D;png&amp;s&#x3D;6256)<br>这里还要在域名的&#96;shop&#96;填写我们的商店地址例如我自己的：<br></code></pre></td></tr></table></figure>
+https://e44132cd.ngrok.io/auth/inline?shop=jetbn.myshopify.com
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain">        一切填写就绪之后一&#96;enter&#96;页面就自动跳转了。<br>        <br>        最后展示的页面：<br>        ![](https:&#x2F;&#x2F;user-gold-cdn.xitu.io&#x2F;2020&#x2F;1&#x2F;17&#x2F;16fb2af2f6b051c0?w&#x3D;1317&amp;h&#x3D;551&amp;f&#x3D;png&amp;s&#x3D;32089)<br><br>## 折腾其他框架尝试<br>&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;前前后后都是使用&#96;React&#96;的&#96;next.js&#96;开发了两三个应用，感觉就是开发的时候太麻烦了，总要内网穿透，而且展示的页面都是&#96;Shopify&#96;的的自己平台上，而且开发写完代码等它响应过来还很慢。就这原因我又开始折腾了寻求其他的方案看看有没有能在自己开发完了再到它那上面，而且让验证&#96;Shopify&#96;的一系列操作让我们的后端小哥来操作。最终我前端选择&#96;Vue&#96;并且验证都放后端了，这样我就能像平常开发&#96;Vue&#96;项一样了。<br><br>下面介绍下我纯前端进行&#96; Shopify&#96;的验证操作使用&#96;vue&#96;。（前提要素内网穿透，不过开发的时候不需要）<br><br>1. 添加安装应用路由<br></code></pre></td></tr></table></figure></code></pre><p>  {</p>
+<pre><code>path: &apos;/shopify/install&apos;,
+beforeEnter(to, _from, next) {
+  if (to.query.shop) {  //要在域名后添加开发的商店地址
+      const shop = to.query.shop,
+      scopes = &apos;read_orders,read_products,write_products&apos;, // api权限
+      // 重定向地址就是在创建应用的时候填写的第二个（重定向URL可以自己随意写了），我这里是域名加/shopify/auth
+      redirect_uri = &apos;https://&apos; + process.env.VUE_APP_ROOT_URL + &apos;/shopify/auth&apos;, 
+      // 拼接安装应用地址需要SHOPIFY_API_KEY我填写在我的.env文件中了
+      install_url =
+            &apos;http://&apos; + shop + &apos;/admin/oauth/authorize?client_id=&apos; +
+            process.env.VUE_APP_SHOPIFY_API_KEY +
+            &apos;&amp;scope=&apos; + scopes + &apos;&amp;redirect_uri=&apos; + redirect_uri
+    // 本地跳转安装地址
+    window.location = install_url
+  } else {
+    next({ path: &apos;/error&apos; })
+  }
+}</code></pre><p>   },</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">    <br>2. 重定向验证路由<br></code></pre></td></tr></table></figure>
+<p>   {</p>
+<pre><code>path: &apos;/shopify/auth&apos;,
+beforeEnter(to, _from, next) {
+// 通过回调的url获取相关的参数
+  const shop = to.query.shop,
+    hmac = to.query.hmac,
+    code = to.query.code
+// 使用SHOPIFY_API_SECRET_KEY验证 并且之后拿取access_token（这步没写）
+  if (shop &amp;&amp; hmac &amp;&amp; code) {
+    const map = Object.assign({}, to.query)
+    delete map[&apos;signature&apos;]
+    delete map[&apos;hmac&apos;]
+    const message = querystring.stringify(map)
+    const encrypted =
+      crypto.createHmac(&apos;sha256&apos;, process.env.VUE_APP_SHOPIFY_API_SECRET_KEY)
+            .update(message)
+            .digest(&apos;hex&apos;)
+    // const providedHmac =  Buffer.from(hmac, &apos;utf-8&apos;)
+    // const generatedHash = Buffer.from(encrypted, &apos;utf-8&apos;)
+
+    let hashEquals = false
+
+    try {
+      // later: Auth fails with `crypto.timingSafeEqual`
+      // hashEquals = crypto.timingSafeEqual(generatedHash, providedHmac)
+      hashEquals = hmac === encrypted
+    } catch (e) {
+      hashEquals = false
+    }
+
+    if (!hashEquals) {
+      next({ path: &apos;/error&apos; })
+    } else {
+      next(&apos;/&apos;)
+    }
+  } else {
+    next({ path: &apos;/error&apos; })
+  }
+}</code></pre><p>   }</p>
+<pre><code>
+`Vue`这相关的验证方案也是从`Github`上面捞的，特地记录下。具体地址忘了，有需要自己可以搜搜。🤣
+</code></pre></li>
 </ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&ensp;&ensp;&ensp;&ensp;经过一段时间的熟悉，自己也算又掌握一项新东西了。刚开始这个<code>Shopify</code>插件应用开发真的是巨坑啊，虽然官方有文档流程，但是都是英文的而且基础的搭建都是<code>api</code>都是用<code>GraphQL</code>然后我自己尝试了都是各种超时操作，请求不到最后就自己弃用了，用<code>ResfulApi</code>。然后就是遇到问题啊啥的都跟本搜不到，我想着这也太难了我，然后只能硬着头皮去官方文档里找，最后到现在也算是起起伏伏终于都熟悉了，搞懂了。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 这之后发现了英文水平太重要了。虽然开发文档基本内容能看懂，但是都是半猜半疑的，然后翻译一波。（各种不准确），然后开始补英文吧。🤞</p>
@@ -504,8 +617,11 @@
     </div>
 </footer>
   <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+hljs.initHighlightingOnLoad();
 </script>
 
 <script src="/js/plugin.min.js"></script>
