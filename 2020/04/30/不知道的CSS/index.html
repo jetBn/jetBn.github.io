@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>你不知道的CSS  | 博客</title>
+  <meta name="description" content="前言 &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;CSS的世界是神奇的。当今所以不管移动端还是PC端网页都是离不开CSC（层叠样式表），像类选择，id选择等等这些选择器 我们工作都有用到，但是难免忽略一些，CSS中更强大的属性我们很少用到，特此记录一些。 用~&#x2F; +兄弟选择器来美化表单元素 ~选择器：查找某一个元素的后面的所有兄弟元素 +选择器：查找某一个元素的后面紧邻的兄弟元素  用font">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你不知道的CSS ">
+<meta property="og:url" content="http://jetbn.github.io/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言 &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;CSS的世界是神奇的。当今所以不管移动端还是PC端网页都是离不开CSC（层叠样式表），像类选择，id选择等等这些选择器 我们工作都有用到，但是难免忽略一些，CSS中更强大的属性我们很少用到，特此记录一些。 用~&#x2F; +兄弟选择器来美化表单元素 ~选择器：查找某一个元素的后面的所有兄弟元素 +选择器：查找某一个元素的后面紧邻的兄弟元素  用font">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-30T05:42:00.000Z">
+<meta property="article:modified_time" content="2020-04-30T07:22:17.122Z">
+<meta property="article:author" content="jetBn">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://jetbn.github.io/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/highlight.js/10.0.0/styles/atom-one-light.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/jetBn" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">陈文东</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web前端开发工程师</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 杭州, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jetBn" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%89%8D%E7%AB%AF/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%89%8D%E7%AB%AF/Vue/">Vue</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%89%8D%E7%AB%AF/Vue/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Next-js/" rel="tag">Next.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shopify/" rel="tag">Shopify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Next-js/" style="font-size: 13px;">Next.js</a> <a href="/tags/React/" style="font-size: 13px;">React</a> <a href="/tags/Shopify/" style="font-size: 13px;">Shopify</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/" class="title">你不知道的CSS </a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-30T05:42:00.000Z" itemprop="datePublished">2020-04-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/Vue3-0%E5%B0%9D%E8%AF%95/" class="title">Vue3.0尝试</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:59:17.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/React/">React</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" class="title">Shopify插件开发入坑体验</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:58:15.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/Vue/">Vue</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" class="title">mpvue入坑记录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T02:57:09.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-不知道的CSS" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      你不知道的CSS 
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/" class="article-date">
+	  <time datetime="2020-04-30T05:42:00.000Z" itemprop="datePublished">2020-04-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CSS/" rel="tag">CSS</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
+<p>&ensp;&ensp;&ensp;&ensp;<code>CSS</code>的世界是神奇的。当今所以不管移动端还是PC端网页都是离不开<code>CSC</code>（层叠样式表），像类选择，id选择等等这些选择器 我们工作都有用到，但是难免忽略一些，<code>CSS</code>中更强大的属性我们很少用到，特此记录一些。</p>
+<h2 id="用-兄弟选择器来美化表单元素"><a href="#用-兄弟选择器来美化表单元素" class="headerlink" title="用~/ +兄弟选择器来美化表单元素"></a>用<code>~</code>/ <code>+</code>兄弟选择器来美化表单元素</h2><ol>
+<li><code>~</code>选择器：查找某一个元素的后面的所有兄弟元素</li>
+<li><code>+</code>选择器：查找某一个元素的后面紧邻的兄弟元素</li>
+</ol>
+<h2 id="用font-size：0来清除间距"><a href="#用font-size：0来清除间距" class="headerlink" title="用font-size：0来清除间距"></a>用<code>font-size：0</code>来清除间距</h2><p> &ensp;&ensp;&ensp;&ensp;<code>inline-block</code>的元素之间会受空白区域的影响，也就是元素之间差不多会有一个字符的间隙。如果在同一行内有4个25%相同宽度的元素，会导致最后一个元素掉下来（如图）。你可以利用元素浮动<code>float</code>，或者压缩html，清除元素间的空格来解决。但最简单有效的方法还是设置父元素的<code>font-size</code>属性为0。</p>
+<h2 id="用-overflow-來清除浮动-创建块级格式化上下文"><a href="#用-overflow-來清除浮动-创建块级格式化上下文" class="headerlink" title="用 overflow 來清除浮动(创建块级格式化上下文)"></a>用 overflow 來清除浮动(创建块级格式化上下文)</h2><p> 通过触发BFC方式，实现清除浮动(父元素添加overflow:hidden)<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">.fahter&#123;<br>      width: 400px;<br>      border: 1px solid deeppink;<br>      overflow: hidden;<br>  &#125;<br></code></pre></td></tr></table></figure></p>
+<h2 id="用pointer-event来禁用事件"><a href="#用pointer-event来禁用事件" class="headerlink" title="用pointer-event来禁用事件"></a>用pointer-event来禁用事件</h2><ol>
+<li><p>阻止任何点击动作的执行</p>
+</li>
+<li><p>使链接显示为默认光标(cursor:default)</p>
+</li>
+<li><p>阻止触发hover和active状态</p>
+</li>
+<li><p>阻止JavaScript点击事件的触发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">	&#x2F;&#x2F;使用该类，任何点击事件将无效<br><br>.disabled &#123; pointer-events: none; &#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="用max-width来防止图片撑破容器"><a href="#用max-width来防止图片撑破容器" class="headerlink" title="用max-width来防止图片撑破容器"></a>用max-width来防止图片撑破容器</h2><p> 针对内容性的文案，图片大小都是未知的，为了防止图片过大而撑破容器，可以通过设置图片的max-width:100%来处理。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">img &#123;<br>   display:inline-block;<br>   max-width: 100%;  <br>   &#125;<br></code></pre></td></tr></table></figure></p>
+<h2 id="实现三角形"><a href="#实现三角形" class="headerlink" title="实现三角形"></a>实现三角形</h2><p> 新建一个元素，将它的宽高都设置为0；然后通过设置border属性来实现三角形效果<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plain"> .arrow&#123;<br>    width: 0;<br>    height: 0;<br><br>    &#x2F;*直角三角形*&#x2F;<br><br>    &#x2F;* border-width: 50px 50px 0 0;<br>    border-style: solid;<br>    border-color: transparent #000 transparent transparent; *&#x2F;<br><br>    &#x2F;*向下三角形*&#x2F;<br>    &#x2F;* border-width: 100px 100px 0 100px;<br>    border-style: solid;<br>    border-color: brown transparent transparent transparent; *&#x2F;<br><br>&#125;<br></code></pre></td></tr></table></figure></p>
+<h2 id="移动端禁止用户长按文字选择功能"><a href="#移动端禁止用户长按文字选择功能" class="headerlink" title="移动端禁止用户长按文字选择功能"></a>移动端禁止用户长按文字选择功能</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain"> .unselect &#123;<br>  -webkit-touch-callout:none;<br>  -webkit-user-select:none;<br>  -khtml-user-select:none;<br>  -moz-user-select:none;<br>  -ms-user-select:none;<br>  user-select:none<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="文字模糊"><a href="#文字模糊" class="headerlink" title="文字模糊"></a>文字模糊</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain"> .blur &#123;<br>  color: transparent;<br>  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="超出N行显示省略号"><a href="#超出N行显示省略号" class="headerlink" title="超出N行显示省略号"></a>超出N行显示省略号</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plain"> .hide-text-n &#123;<br>  display: -webkit-box;<br>  -webkit-box-orient: vertical;<br>  -webkit-line-clamp: n;<br>  overflow: hidden<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="硬件加速"><a href="#硬件加速" class="headerlink" title="硬件加速"></a>硬件加速</h2><p> 写transition、animation时，请用transform代替left、top等属性，从而使动画更流畅</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain"> cube &#123;<br>  -webkit-transform: translateZ(0);<br>  -moz-transform: translateZ(0);<br>  -ms-transform: translateZ(0);<br>  -o-transform: translateZ(0);<br>  transform: translateZ(0)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="移动端屏幕旋转时，字体大小不改变"><a href="#移动端屏幕旋转时，字体大小不改变" class="headerlink" title="移动端屏幕旋转时，字体大小不改变"></a>移动端屏幕旋转时，字体大小不改变</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain"> html, body, form, p, div, h1, h2, h3, h4, h5, h6 &#123;<br> -webkit-text-size-adjust: 100%;<br> -ms-text-size-adjust: 100%;<br> text-size-adjust: 100%<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="锚点跳转平滑过渡"><a href="#锚点跳转平滑过渡" class="headerlink" title="锚点跳转平滑过渡"></a>锚点跳转平滑过渡</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">body &#123;<br>   scroll-behavior: smooth;<br> &#125;<br></code></pre></td></tr></table></figure>
+<h2 id="最后一个元素不需要边框、边距等"><a href="#最后一个元素不需要边框、边距等" class="headerlink" title="最后一个元素不需要边框、边距等"></a>最后一个元素不需要边框、边距等</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">ul &gt; li:not(:last-child) &#123;<br>  border-bottom: 1px solid #c5b7b7<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="清除浮动-适应伪类"><a href="#清除浮动-适应伪类" class="headerlink" title="清除浮动(适应伪类)"></a>清除浮动(适应伪类)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">.clearfix::after &#123;<br>  content: &#39;&#39;;<br>  display: block;<br>  height: 0;<br>  visibility: hidden;<br>  clear: both<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="CSS选择器选基数项、偶数项、倍数分组项"><a href="#CSS选择器选基数项、偶数项、倍数分组项" class="headerlink" title="CSS选择器选基数项、偶数项、倍数分组项"></a>CSS选择器选基数项、偶数项、倍数分组项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#x2F;* 基数 *&#x2F;<br>.selector:nth-child(2n-1) &#123;&#125;<br><br>&#x2F;* 偶数 *&#x2F;<br>.selector:nth-child(2n) &#123;&#125;<br><br>&#x2F;* 倍数分组项 *&#x2F;<br>.selector:nth-child(3n+1) &#123;&#125; &#x2F;* 匹配第1、4、7、10... *&#x2F;<br>.selector:nth-child(3n+5) &#123;&#125; &#x2F;* 匹配第5、8、11、14... *&#x2F;<br>.selector:nth-child(5n-1) &#123;&#125; &#x2F;* 匹配第4、9、13、17... *&#x2F;<br></code></pre></td></tr></table></figure>
+
+<h2 id="当输入框的value的长度不为0时，显示搜索按钮"><a href="#当输入框的value的长度不为0时，显示搜索按钮" class="headerlink" title="当输入框的value的长度不为0时，显示搜索按钮"></a>当输入框的value的长度不为0时，显示搜索按钮</h2><p>用到placeholder-shown伪类，简单来说就是当input标签有了placeholder属性并且内容不为空时，会触发该状态，但是当input标签有了value值之后，就会消除该状态，也要配合:not选择器</p>
+<p><code>html</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">&lt;div class&#x3D;&quot;input-line&quot;&gt;<br>  &lt;input type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;请输入关键字进行搜索&quot;&gt;<br>  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;search-btn&quot;&gt;搜索&lt;&#x2F;button&gt;<br>&lt;&#x2F;div&gt;<br></code></pre></td></tr></table></figure>
+<p><code>css</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">.search-btn &#123;<br>  opacity: 0;<br>  transition: all .5s ease-in-out<br>&#125;<br><br> input:not(:placeholder-shown)~.search-btn &#123;<br>  opacity: 1<br> &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://jetbn.github.io/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/" title="你不知道的CSS " target="_blank" rel="external">http://jetbn.github.io/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jetBn" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jetBn" target="_blank"><span class="text-dark">陈文东</span><small class="ml-1x">Web前端开发工程师</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/04/29/Vue3-0%E5%B0%9D%E8%AF%95/" title="Vue3.0尝试"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jetBn" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="//cdn.bootcdn.net/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+hljs.initHighlightingOnLoad();
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
