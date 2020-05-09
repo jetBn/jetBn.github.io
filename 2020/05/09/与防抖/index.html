@@ -17,16 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>归档: 2020 | jetBn的博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://jetbn.github.io/archives/2020/index.html">
+  <title>JS节流与防抖 | jetBn的博客</title>
+  <meta name="description" content="前言 &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。 节流&amp;ensp;&amp;ensp;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS节流与防抖">
+<meta property="og:url" content="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言 &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。 节流&amp;ensp;&amp;ensp;&amp;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-09T06:52:00.000Z">
+<meta property="article:modified_time" content="2020-05-09T07:28:46.539Z">
 <meta property="article:author" content="jetBn">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://jetbn.github.io/archives/2020/index.html">
+  <link rel="canonical" href="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -329,98 +333,171 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">归档: 2020</h1>
-	      <p class="text-muted">共 6 篇文章</p>
-	    </header>
-	    <div class="article-body">
-	      
-  
-  
+  <div class="content">
+  <article id="post-与防抖" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
+    <div class="article-header">
       
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS节流与防抖
+    </h1>
+  
+
       
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2020" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2020
-            </a>
-            <!-- <a href="/archives/2020" class="archive-year">2020</a> -->
-          </h3>
-        </div>
-        <div id="collapse2020" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2020">
-        <div class="panel-body">
-          <div class="collection">
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/" class="article-date">
+	  <time datetime="2020-05-09T06:52:00.000Z" itemprop="datePublished">2020-05-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+  </span>
+
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
+<p>&ensp;&ensp;&ensp;&ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。</p>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>&ensp;&ensp;&ensp;&ensp;高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率</p>
+<ul>
+<li><p>应用场景</p>
+<pre><code>1. DOM元素的拖拽功能实现（mousemove） 
+2. 射击游戏的 mousedown/keydown 事件（单位时间只能发射一颗子弹）3. 计算鼠标移动的距离（mousemove）
+4. 搜索联想（keyup）
+5. 滚动事件scroll，（只要页面滚动就会间隔一段时间判断一次）</code></pre></li>
+</ul>
+<ul>
+<li><p>代码实现  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plain"> function debounce(fn, delay, scope) &#123;<br>    let timer &#x3D; null;<br>    &#x2F;&#x2F; 返回函数对debounce作用域形成闭包<br>    return function () &#123;<br>        &#x2F;&#x2F; setTimeout()中用到函数环境总是window,故需要当前环境的副本；<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        &#x2F;&#x2F; 如果事件被触发，清除timer并重新开始计时<br>        clearTimeout(timer);<br>        timer &#x3D; setTimeout(function () &#123;<br>            fn.apply(context, args);<br>        &#125;, delay);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>代码解读</p>
+<pre><code>1. 第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码；  
+2. 当第二次调用该函数时，它会清除前一次的定时器并设置另一个;    
+3. 如果前一个定时器已经执行过了，这个操作就没有任何意义；   
+4. 然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器；目的是只有在执行函数的请求停止了delay时间之后才执行。</code></pre></li>
+</ul>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>&ensp;&ensp;&ensp;&ensp;触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p>
+<ul>
+<li><p>应用场景</p>
+<pre><code>1. 手机号、邮箱输入检测
+2. 搜索框搜索输入（只需最后一次输入完后，再放松Ajax请求）
+3. 窗口大小resize（只需窗口调整完成后，计算窗口大小，防止重复渲染）
+4. 滚动事件scroll（只需执行触发的最后一次滚动事件的处理程序）
+5. 文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，（停止输入后）验证一次就好</code></pre></li>
+<li><p>防抖实现</p>
+<ol>
+<li><p>利用时间戳简单实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">function throttle(fn, threshold, scope) &#123;<br>    let timer;<br>    let prev &#x3D; Date.now();<br>    return function () &#123;<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        let now &#x3D; Date.now();<br>        if (now - prev &gt; threshold) &#123;<br>            prev &#x3D; now;<br>            fn.apply(context, args);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>利用定时器简单实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">function throttle2(fn, threshold, scope) &#123;<br>    let timer;<br>    return function () &#123;<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        if (!timer) &#123;<br>            timer &#x3D; setTimeout(function () &#123;<br>                fn.apply(context, args);<br>                timer &#x3D; null;<br>            &#125;, threshold)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>防抖和节流有很多实现的方法，其大致思路基本是这样的。</li>
+<li>防抖和节流是不同的，因为节流虽然中间的处理函数被限制了，但是只是减少了频率，而防抖则把中间的处理函数全部过滤掉了，只执行规判定时间内的最后一个事件。</li>
+<li>防抖和节流各自有自己特点，需要在不同场景进行选择，不能混合乱使用。</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
     
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/" title="JS节流与防抖" target="_blank" rel="external">http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/</a>
+    </li>
     
-<a href="/2020/05/09/t%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-05-09T07:34:00.000Z" itemprop="datePublished">2020-05-09</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Git常用命令记录
-</a>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jetBn" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jetBn" target="_blank"><span class="text-dark">陈文东</span><small class="ml-1x">Web前端开发工程师</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
 
 
   
-    
-    
-    
-<a href="/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-05-09T06:52:00.000Z" itemprop="datePublished">2020-05-09</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> JS节流与防抖
-</a>
+</div>
 
-
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/09/t%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" title="Git常用命令记录"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
     
     
-    
-<a href="/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-04-30T05:42:00.000Z" itemprop="datePublished">2020-04-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 你不知道的CSS 
-</a>
-
-
-  
+    <li class="next">
+      <a href="/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/" title="你不知道的CSS "><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
-    
-<a href="/2020/04/29/Vue3-0%E5%B0%9D%E8%AF%95/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-04-29T02:59:17.000Z" itemprop="datePublished">2020-04-29</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Vue3.0尝试
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/04/29/Shopify%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%E5%85%A5%E5%9D%91%E4%BD%93%E9%AA%8C/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-04-29T02:58:15.000Z" itemprop="datePublished">2020-04-29</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Shopify插件开发入坑体验
-</a>
-
-
-  
-    
-    
-    
-<a href="/2020/04/29/mpvue%E5%85%A5%E5%9D%91%E8%AE%B0%E5%BD%95/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-04-29T02:57:09.000Z" itemprop="datePublished">2020-04-29</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> mpvue入坑记录
-</a>
-
-
+  </ul>
   
   
-    </div></div></div></section>
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
   
 
-	    </div>
-  	</article>
-  	 	
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -480,6 +557,37 @@ hljs.initHighlightingOnLoad();
 
 
 
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 

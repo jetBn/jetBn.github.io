@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jetbn.github.io/"/>
-  <updated>2020-04-30T07:22:17.122Z</updated>
+  <updated>2020-05-09T07:37:48.640Z</updated>
   <id>http://jetbn.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git常用命令记录</title>
+    <link href="http://jetbn.github.io/2020/05/09/t%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/"/>
+    <id>http://jetbn.github.io/2020/05/09/t%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-05-09T07:34:00.000Z</published>
+    <updated>2020-05-09T07:37:48.640Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="git相关命令常用"><a href="#git相关命令常用" class="headerlink" title="git相关命令常用"></a>git相关命令常用</h3><ul><li><ol><li>git checkout -b sub_main origin/sub_main<br>   拉取远程分支到本地分支 并且切换到该分支</li></ol></li><li><ol start="2"><li>git branch<br>   查看本地所有分支</li></ol></li><li><ol start="3"><li>git branch -a<br>   查看远程本地所有分支</li></ol></li><li><ol start="4"><li>git branch -d &lt;分支名称&gt;<br>   查看远程本地所有分支</li></ol></li><li><ol start="5"><li>git pull<br>   拉取最新的代码都本地</li></ol></li><li><ol start="6"><li>git commit -m<br>   进行commit操作</li></ol></li><li><ol start="7"><li>git add .<br>   进行添加到暂存区</li></ol></li><li><ol start="8"><li>git push origin &lt;分支名称&gt;:&lt;远程分支名称&gt;<br>   将本地分支推送到远程分支</li></ol></li><li><ol start="9"><li>git push -u origin mybranch<br>   将本地分支推送到远程分支<blockquote><p>$ git push -u origin master <br> 上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。</p></blockquote></li></ol></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;git相关命令常用&quot;&gt;&lt;a href=&quot;#git相关命令常用&quot; class=&quot;headerlink&quot; title=&quot;git相关命令常用&quot;&gt;&lt;/a&gt;git相关命令常用&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;git checkout -b sub_main or
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS节流与防抖</title>
+    <link href="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/"/>
+    <id>http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/</id>
+    <published>2020-05-09T06:52:00.000Z</published>
+    <updated>2020-05-09T07:28:46.539Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr><p>&ensp;&ensp;&ensp;&ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。</p><h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>&ensp;&ensp;&ensp;&ensp;高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率</p><ul><li><p>应用场景</p><pre><code>1. DOM元素的拖拽功能实现（mousemove） 2. 射击游戏的 mousedown/keydown 事件（单位时间只能发射一颗子弹）3. 计算鼠标移动的距离（mousemove）4. 搜索联想（keyup）5. 滚动事件scroll，（只要页面滚动就会间隔一段时间判断一次）</code></pre></li></ul><ul><li><p>代码实现  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plain"> function debounce(fn, delay, scope) &#123;<br>    let timer &#x3D; null;<br>    &#x2F;&#x2F; 返回函数对debounce作用域形成闭包<br>    return function () &#123;<br>        &#x2F;&#x2F; setTimeout()中用到函数环境总是window,故需要当前环境的副本；<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        &#x2F;&#x2F; 如果事件被触发，清除timer并重新开始计时<br>        clearTimeout(timer);<br>        timer &#x3D; setTimeout(function () &#123;<br>            fn.apply(context, args);<br>        &#125;, delay);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li><li><p>代码解读</p><pre><code>1. 第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码；  2. 当第二次调用该函数时，它会清除前一次的定时器并设置另一个;    3. 如果前一个定时器已经执行过了，这个操作就没有任何意义；   4. 然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器；目的是只有在执行函数的请求停止了delay时间之后才执行。</code></pre></li></ul><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>&ensp;&ensp;&ensp;&ensp;触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p><ul><li><p>应用场景</p><pre><code>1. 手机号、邮箱输入检测2. 搜索框搜索输入（只需最后一次输入完后，再放松Ajax请求）3. 窗口大小resize（只需窗口调整完成后，计算窗口大小，防止重复渲染）4. 滚动事件scroll（只需执行触发的最后一次滚动事件的处理程序）5. 文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，（停止输入后）验证一次就好</code></pre></li><li><p>防抖实现</p><ol><li><p>利用时间戳简单实现</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">function throttle(fn, threshold, scope) &#123;<br>    let timer;<br>    let prev &#x3D; Date.now();<br>    return function () &#123;<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        let now &#x3D; Date.now();<br>        if (now - prev &gt; threshold) &#123;<br>            prev &#x3D; now;<br>            fn.apply(context, args);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li><li><p>利用定时器简单实现</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">function throttle2(fn, threshold, scope) &#123;<br>    let timer;<br>    return function () &#123;<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        if (!timer) &#123;<br>            timer &#x3D; setTimeout(function () &#123;<br>                fn.apply(context, args);<br>                timer &#x3D; null;<br>            &#125;, threshold)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li></ol></li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol><li>防抖和节流有很多实现的方法，其大致思路基本是这样的。</li><li>防抖和节流是不同的，因为节流虽然中间的处理函数被限制了，但是只是减少了频率，而防抖则把中间的处理函数全部过滤掉了，只执行规判定时间内的最后一个事件。</li><li>防抖和节流各自有自己特点，需要在不同场景进行选择，不能混合乱使用。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;hr&gt;
+&lt;p&gt;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件
+      
+    
+    </summary>
+    
+    
+      <category term="Web前端" scheme="http://jetBn.github.io/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>你不知道的CSS </title>
