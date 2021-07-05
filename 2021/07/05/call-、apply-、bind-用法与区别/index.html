@@ -17,18 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>404 Not Found：该页无法显示 | jetBn的博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="404 Not Found：该页无法显示">
-<meta property="og:url" content="http://jetbn.github.io/404.html">
+  <title>理解call()、apply()、bind()用法与区别 | jetBn的博客</title>
+  <meta name="description" content="理解call()、apply()、bind()用法与区别 相关介绍这三个函数都是在JavaScript中改变函数调用的this指向的，具体的可能就是参数传递不同。 call()方法该方法使用一个指定的this值和给出一个或多个参数来调用一个函数，他们都是Function对象的方法，每个函数都能调用。它可传递两个参数第一个为在function函数运行时使用的this值，第二个为指定的参数。 具体的使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解call()、apply()、bind()用法与区别">
+<meta property="og:url" content="http://jetbn.github.io/2021/07/05/call-%E3%80%81apply-%E3%80%81bind-%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="理解call()、apply()、bind()用法与区别 相关介绍这三个函数都是在JavaScript中改变函数调用的this指向的，具体的可能就是参数传递不同。 call()方法该方法使用一个指定的this值和给出一个或多个参数来调用一个函数，他们都是Function对象的方法，每个函数都能调用。它可传递两个参数第一个为在function函数运行时使用的this值，第二个为指定的参数。 具体的使">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-28T09:38:58.115Z">
-<meta property="article:modified_time" content="2020-04-28T09:38:58.115Z">
+<meta property="article:published_time" content="2021-07-05T03:53:26.000Z">
+<meta property="article:modified_time" content="2021-07-05T03:55:26.957Z">
 <meta property="article:author" content="jetBn">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://jetbn.github.io/404.html">
+  <link rel="canonical" href="http://jetbn.github.io/2021/07/05/call-%E3%80%81apply-%E3%80%81bind-%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -332,14 +334,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-call-、apply-、bind-用法与区别" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      404 Not Found：该页无法显示
+      理解call()、apply()、bind()用法与区别
     </h1>
   
 
@@ -347,8 +349,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/404.html" class="article-date">
-	  <time datetime="2020-04-28T09:38:58.115Z" itemprop="datePublished">2020-04-28</time>
+	<a href="/2021/07/05/call-%E3%80%81apply-%E3%80%81bind-%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/" class="article-date">
+	  <time datetime="2021-07-05T03:53:26.000Z" itemprop="datePublished">2021-07-05</time>
 	</a>
 </span>
         
@@ -356,13 +358,45 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/404.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/07/05/call-%E3%80%81apply-%E3%80%81bind-%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <script type="text/javascript" src="//www.qq.com/404/search_children.js" charset="utf-8" homePageUrl="<%- config.url %>" homePageName="回到我的主页"></script>
+        <h1 id="理解call-、apply-、bind-用法与区别"><a href="#理解call-、apply-、bind-用法与区别" class="headerlink" title="理解call()、apply()、bind()用法与区别"></a>理解call()、apply()、bind()用法与区别</h1><hr>
+<h2 id="相关介绍"><a href="#相关介绍" class="headerlink" title="相关介绍"></a>相关介绍</h2><p>这三个函数都是在<code>JavaScript</code>中改变函数调用的<code>this</code>指向的，具体的可能就是参数传递不同。</p>
+<h2 id="call-方法"><a href="#call-方法" class="headerlink" title="call()方法"></a><code>call()方法</code></h2><p>该方法使用一个指定的<code>this</code>值和给出一个或多个参数来调用一个函数，他们都是<code>Function</code>对象的方法，每个函数都能调用。它可传递两个参数第一个为在<code>function</code>函数运行时使用的<code>this</code>值，第二个为指定的参数。</p>
+<p>具体的使用方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs plain">let obj &#x3D; &#123;age: 11&#125;<br><br>function fun(arg) &#123;<br>    console.log(arg)<br>    console.log(this.age)<br>&#125;<br>fun(&#39;lili&#39;) &#x2F;&#x2F;直接调用 此时的this指向window所以 第一行打印&#96;lili&#96;第二行打印&#96;undefined&#96;<br><br>&#x2F;&#x2F; 使用call改变函数调用运行时的this<br><br>fun.call(obj, &#39;lili&#39;) &#x2F;&#x2F; 分别打印 lili 11<br><br>&#x2F;&#x2F; 多个参数<br><br>function fun(arg) &#123;<br>    console.log(arguments) <br>    console.log(this.age) <br>&#125;<br><br>fun.call(obj, &#39;lili&#39;, &#39;20&#39;)  &#x2F;&#x2F; 此时的打印分别是arguments中两个参数 lili以及 20，以及11<br></code></pre></td></tr></table></figure>
+
+<h2 id="apply-方法"><a href="#apply-方法" class="headerlink" title="apply()方法"></a><code>apply()方法</code></h2><p>该方法其实跟<code>call()</code>方法是一样的就是传递的参数不一样,它的第二个参数为一个数组（或类似数组对象）</p>
+<p>具体的使用方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">let obj &#x3D; &#123;age: 11&#125;<br><br>function fun() &#123;<br>    console.log(arguments)<br>    console.log(this.age)<br>&#125;<br><br>fun.apply(obj, [&#39;lili&#39;, &#39;20&#39;]) &#x2F;&#x2F;此时打印个跟上述call传递多个参数的时候是一致的<br></code></pre></td></tr></table></figure>
+
+<p>通过此两个案例我们可以清楚发现，<code>call()</code>和<code>apply()</code>函数的第一个参数都是改变<code>this</code>的指向，而<code>call()</code>和<code>apply()</code>的区别仅仅就是<code>call()</code>传递参数需要一项一项的传， 但是<code>apply()</code>直接通过一个数组传递就好了。</p>
+<h2 id="bind-方法"><a href="#bind-方法" class="headerlink" title="bind()方法"></a><code>bind()方法</code></h2><p>该方法与<code>apply()</code>和<code>call()</code>很相似，也是可以改变函数体内的<code>this</code>指向的，它是创建一个新的函数, 在<code>bind()</code>被调用的时候，这个新函数的<code>this</code>被指定为<code>bind()</code>的第一个参数，而其余的的参数将作为新函数的参数，供调用时使用。</p>
+<p>具体使用代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain">let obj &#x3D; &#123;age: 11&#125;<br><br>function fun() &#123;<br>    console.log(this.age)<br>&#125;<br><br>fun() &#x2F;&#x2F; undefined<br><br>let newFun &#x3D; fun.bind(obj)<br><br>newFun() &#x2F;&#x2F; 11<br></code></pre></td></tr></table></figure>
+<p>由上面的运行代码在<code>bind()</code>函数改变<code>this</code>的指向之前我们打印的是<code>undefined</code>,因为我此时的<code>this</code>指向是<code>window</code>在此里面没有定义<code>age</code>的属性，所以我们答应的是<code>undefined</code>，当我们通过<code>bind()</code>函数改变<code>this</code>传入<code>obj</code>此时又新生成一个<code>newFun()</code>函数,当我们调用此函数的时候，此时的<code>this</code>指向就是<code>obj</code>了，所以我们打印了 11。</p>
+<h2 id="bind-apply-call-的共同和不同点："><a href="#bind-apply-call-的共同和不同点：" class="headerlink" title="bind(), apply(), call()的共同和不同点："></a>bind(), apply(), call()的共同和不同点：</h2><ul>
+<li>三个都是<code>Fucntion</code>对象的方法都是改变函数的<code>this</code>对象的指向的;</li>
+<li>三个函数的第一个参数都是<code>this</code>要指向的对象，也就是想指定的上下文，上下文就是指调用函数的那个对象。（如果没有传以及<code>null</code>都是指向<code>window</code>）;</li>
+<li>三个都可以传递参数，<code>apply()</code>是数组，<code>call()</code>与<code>bind()</code>都是有序传入参数;</li>
+<li><code>bind</code>是返回函数，便于稍后调，而<code>apply()</code>与<code>call()</code>都是立即执行</li>
+</ul>
+<h2 id="最后分别手动实现"><a href="#最后分别手动实现" class="headerlink" title="最后分别手动实现"></a>最后分别手动实现</h2><ol>
+<li><code>call()</code>函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs plain">Function.prototype.myCall &#x3D; function(context, ...args) &#123;<br>    if(typeof context &#x3D;&#x3D;&#x3D; &#39;object&#39;) &#123;<br>        context &#x3D; context || window<br>    &#125; else &#123;<br>        context &#x3D; Object.create(null)<br>    &#125;<br><br>    let fn &#x3D; Symbol() &#x2F;&#x2F; 保证fn的唯一性<br><br>    context[fn] &#x3D; this<br><br>    let result &#x3D; context[fn](...args)<br><br>    delete context[fn]<br><br>    return result<br>&#125;<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>apply()</code>函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plain">Function.prototype.myApply &#x3D; function(context, arg) &#123;<br>    if(typeof context &#x3D;&#x3D;&#x3D; &#39;object&#39;) &#123;<br>        context &#x3D; context || window<br>    &#125; else &#123;<br>        context &#x3D; Object.create(null)<br>    &#125;<br>    let fn &#x3D; Symbol() &#x2F;&#x2F; 保证fn的唯一性<br><br>    context[fn] &#x3D; this<br><br>    let result &#x3D; context[fn](...args)<br>    <br>    delete context[fn]<br><br>    return result<br>&#125;<br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>bind()</code>函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">Function.prototype.myBind &#x3D; function(context) &#123;<br>    const that &#x3D; this<br>    const args &#x3D; [...arguments].slice(1)<br>    const tempFun &#x3D; function() &#123;&#125;<br>    const resultFun &#x3D; function() &#123;<br>        const nextArgs &#x3D; [...arguments]<br>        return that.apply(this instanceof resultFun ? this : context, [...args, ...nextArgs])<br>    &#125;<br>    tempFun.prototype &#x3D; that.prototype<br>    resultFun.prototype &#x3D; new tempFun()<br>    return resultFun<br>&#125;<br></code></pre></td></tr></table></figure>
 
       
     </div>
@@ -372,7 +406,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://jetbn.github.io/404.html" title="404 Not Found：该页无法显示" target="_blank" rel="external">http://jetbn.github.io/404.html</a>
+      <a href="http://jetbn.github.io/2021/07/05/call-%E3%80%81apply-%E3%80%81bind-%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/" title="理解call()、apply()、bind()用法与区别" target="_blank" rel="external">http://jetbn.github.io/2021/07/05/call-%E3%80%81apply-%E3%80%81bind-%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -403,12 +437,32 @@
   </article>
   
     
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/07/05/defineProperty%E4%B8%8EProxy/" title="defineProperty与Proxy"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/07/05/%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型与原型链"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
   
   
@@ -481,6 +535,37 @@ hljs.initHighlightingOnLoad();
 
 
 
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
