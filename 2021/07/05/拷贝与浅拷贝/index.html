@@ -17,20 +17,25 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>JS节流与防抖 | jetBn的博客</title>
-  <meta name="description" content="前言 &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。 节流&amp;ensp;&amp;ensp;&amp;">
+  <title>深拷贝与浅拷贝 | jetBn的博客</title>
+  <meta name="description" content="深拷贝与浅拷贝 关于JavaScript中的数据类型  JavaScript中的数据类型分为两种大类：  基础类型: undefined、null、String, Number、Boolean以及ES6引入的Symbol、ES10中的BigInt  引用类型：Object 相关的JavaScript对变量都是存储在栈内存、堆内存中的，而基础类型存在栈内存中，引用类型存在堆内存中。相关在的读写数据的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS节流与防抖">
-<meta property="og:url" content="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/index.html">
+<meta property="og:title" content="深拷贝与浅拷贝">
+<meta property="og:url" content="http://jetbn.github.io/2021/07/05/%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言 &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。 节流&amp;ensp;&amp;ensp;&amp;">
+<meta property="og:description" content="深拷贝与浅拷贝 关于JavaScript中的数据类型  JavaScript中的数据类型分为两种大类：  基础类型: undefined、null、String, Number、Boolean以及ES6引入的Symbol、ES10中的BigInt  引用类型：Object 相关的JavaScript对变量都是存储在栈内存、堆内存中的，而基础类型存在栈内存中，引用类型存在堆内存中。相关在的读写数据的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-09T06:52:00.000Z">
-<meta property="article:modified_time" content="2020-05-09T07:28:46.539Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep4.png">
+<meta property="article:published_time" content="2021-07-05T05:40:40.000Z">
+<meta property="article:modified_time" content="2021-07-05T05:40:49.786Z">
 <meta property="article:author" content="jetBn">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/index.html">
+  <link rel="canonical" href="http://jetbn.github.io/2021/07/05/%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -334,14 +339,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-与防抖" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-拷贝与浅拷贝" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JS节流与防抖
+      深拷贝与浅拷贝
     </h1>
   
 
@@ -349,75 +354,66 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/" class="article-date">
-	  <time datetime="2020-05-09T06:52:00.000Z" itemprop="datePublished">2020-05-09</time>
+	<a href="/2021/07/05/%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
+	  <time datetime="2021-07-05T05:40:40.000Z" itemprop="datePublished">2021-07-05</time>
 	</a>
 </span>
         
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
-  </span>
-
         
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/07/05/%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
-<p>&ensp;&ensp;&ensp;&ensp;在日常开发中进行窗口的resize、scroll，输入框内容校验等操作时，如果事件处理函数调用的频率无限制，会加重浏览器的负担，导致用户体验非常糟糕。这时候我们更希望把多次计算合并成一次，只操作一个精确点来减少调用频率，同时又不影响实际效果。 JS把这种方式称为debounce（防抖）和throttle（节流）。</p>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>&ensp;&ensp;&ensp;&ensp;高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率</p>
+        <h1 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h1><ol>
+<li><p><strong>关于<code>JavaScript</code>中的数据类型</strong></p>
+<p> <code>JavaScript</code>中的数据类型分为两种大类：</p>
 <ul>
-<li><p>应用场景</p>
-<pre><code>1. DOM元素的拖拽功能实现（mousemove） 
-2. 射击游戏的 mousedown/keydown 事件（单位时间只能发射一颗子弹）3. 计算鼠标移动的距离（mousemove）
-4. 搜索联想（keyup）
-5. 滚动事件scroll，（只要页面滚动就会间隔一段时间判断一次）</code></pre></li>
-</ul>
-<ul>
-<li><p>代码实现  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plain"> function debounce(fn, delay, scope) &#123;<br>    let timer &#x3D; null;<br>    &#x2F;&#x2F; 返回函数对debounce作用域形成闭包<br>    return function () &#123;<br>        &#x2F;&#x2F; setTimeout()中用到函数环境总是window,故需要当前环境的副本；<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        &#x2F;&#x2F; 如果事件被触发，清除timer并重新开始计时<br>        clearTimeout(timer);<br>        timer &#x3D; setTimeout(function () &#123;<br>            fn.apply(context, args);<br>        &#125;, delay);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<li><p>基础类型: <code>undefined</code>、<code>null</code>、<code>String</code>, <code>Number</code>、<code>Boolean</code>以及<code>ES6</code>引入的<code>Symbol</code>、<code>ES10</code>中的<code>BigInt</code></p>
 </li>
-<li><p>代码解读</p>
-<pre><code>1. 第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码；  
-2. 当第二次调用该函数时，它会清除前一次的定时器并设置另一个;    
-3. 如果前一个定时器已经执行过了，这个操作就没有任何意义；   
-4. 然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器；目的是只有在执行函数的请求停止了delay时间之后才执行。</code></pre></li>
-</ul>
-<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>&ensp;&ensp;&ensp;&ensp;触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p>
-<ul>
-<li><p>应用场景</p>
-<pre><code>1. 手机号、邮箱输入检测
-2. 搜索框搜索输入（只需最后一次输入完后，再放松Ajax请求）
-3. 窗口大小resize（只需窗口调整完成后，计算窗口大小，防止重复渲染）
-4. 滚动事件scroll（只需执行触发的最后一次滚动事件的处理程序）
-5. 文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，（停止输入后）验证一次就好</code></pre></li>
-<li><p>防抖实现</p>
-<ol>
-<li><p>利用时间戳简单实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">function throttle(fn, threshold, scope) &#123;<br>    let timer;<br>    let prev &#x3D; Date.now();<br>    return function () &#123;<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        let now &#x3D; Date.now();<br>        if (now - prev &gt; threshold) &#123;<br>            prev &#x3D; now;<br>            fn.apply(context, args);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<li><p>引用类型：<code>Object</code></p>
+<p>相关的<code>JavaScript</code>对变量都是存储在栈内存、堆内存中的，而基础类型存在栈内存中，引用类型存在堆内存中。相关在的读写数据的时候，对于基础类型的是直接读写栈内存中的数据，引用类型是将一个内存地址保存在栈内存中，读写都是修改栈内存指向堆内存的地址。<br><br>比如以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">let obj &#x3D; &#123;<br>    name: &#39;joy&#39;,<br>    age: 20<br>&#125;<br>let num &#x3D; 200<br></code></pre></td></tr></table></figure>
+<p>这里我们的<code>obj</code>就是存在栈内存中而指向一个堆内存中的地址，<code>num</code>就是直接存在栈内存中的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">let obj1 &#x3D; obj<br>console.log(obj1 &#x3D;&#x3D;&#x3D; obj) &#x2F;&#x2F;true<br></code></pre></td></tr></table></figure>
+<p>重新声明一个变量等于<code>obj</code>我们发现两个是相等的 <br><br>这里我们就是可以发现内存中只是新增一个栈内存指向堆内存中的地址而已，新的这个栈内存还是指向之前的堆内存地址，这种就是浅拷贝。当我们改变<code>obj</code>中的<code>name</code>发现<code>obj1</code>中的<code>name</code>也被改变了，所以我们其实就是改变堆内存的变量而已，又因为两个<code>obj</code>与<code>obj1</code>都是指向这个堆内存地址，所以就是我要改变一个另一个不会发生变化，深度的复制一个堆内存地址和不单单引用地址这种才叫深拷贝。</p>
 </li>
-<li><p>利用定时器简单实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">function throttle2(fn, threshold, scope) &#123;<br>    let timer;<br>    return function () &#123;<br>        let context &#x3D; scope || this, args &#x3D; arguments;<br>        if (!timer) &#123;<br>            timer &#x3D; setTimeout(function () &#123;<br>                fn.apply(context, args);<br>                timer &#x3D; null;<br>            &#125;, threshold)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
+</ul>
+</li>
+<li><p><strong>浅拷贝</strong></p>
+<p> 由上述可知，浅拷贝只是复制了堆内存的引用地址，通常我们在业务中出现的浅拷贝是指复制引用对象的第一层，也就是基本类型复制新值，引用类型复制引用地址。我们使用的方案有循环赋值、扩展运算符、<code>Object.assign()</code><br></p>
+ <img src="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep.png">
+ <img src="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep1.png">
+ 由上图代码示意结构我们发现我们分别使用`Object.assign()`和扩展运算符，浅拷贝了一份`obj`，分别为`obj1`和`obj2`当我们改变`obj`的第一层`name`的时候发现剩下的两个对象的`name`不会随这变化，当我们改变`obj`的第二层属性`child`的`name`的时候发现这三个对象都改变了，这就验证了上述所说的，浅拷贝就是单单复制了引用对象的第一层，而更深层次就没复制。
 
 
 </li>
 </ol>
+<ol start="3">
+<li><p><strong>深拷贝</strong></p>
+<p> 同过上述的浅拷贝，我们应该能了解到深拷贝的含义，就是拷贝对象以及更深层次的子对象，并且拷贝后两个对象互不影响。基本类型复制新值，引用类型开辟新的堆内存，可使用<code>JSON.parse(JSON.stringify(obj))</code>、循环赋值。</p>
+<ol>
+<li><p>使用<code>JSON.parse(JSON.stringify(obj))</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plain">let obj &#x3D; &#123;<br>    name: &#39;joy&#39;,<br>    friends: [&#39;tom&#39;, &#39;lili&#39;],<br>    sex: Symbol(&#39;male&#39;),<br>    age: undefined,<br>    child: &#123;<br>        num: 100<br>    &#125;,<br>    date: new Date(),<br>    reg: &#x2F;\.*&#x2F;g<br>&#125;<br><br>let obj1 &#x3D; JSON.parse(JSON.stringify(obj))<br><br>console.log(obj &#x3D;&#x3D;&#x3D; obj1) &#x2F;&#x2F; false<br><br>obj.child.num &#x3D; 200<br><br>console.log(obj.child.num, obj1.child.num) &#x2F;&#x2F; 200, 100<br></code></pre></td></tr></table></figure>
+<p> 这里我们分别打印<code>child</code>中的<code>num</code>值发现互不影响， 这说明了我们的拷贝成功了。最后我们看下分别打印<code>obj</code>和<code>obj1</code></p>
+<pre><code>&lt;img src =&quot;https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep2.png&quot;/&gt;</code></pre><p> 发现了拷贝忽略我们的<code>undefined</code>、<code>symbol</code>、正则表达式，日期类型、方法。所以这也是这个方法拷贝不足的地方。</p>
 </li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>防抖和节流有很多实现的方法，其大致思路基本是这样的。</li>
-<li>防抖和节流是不同的，因为节流虽然中间的处理函数被限制了，但是只是减少了频率，而防抖则把中间的处理函数全部过滤掉了，只执行规判定时间内的最后一个事件。</li>
-<li>防抖和节流各自有自己特点，需要在不同场景进行选择，不能混合乱使用。</li>
+<li><p><strong> 手写一个<code>deepClone</code></strong></p>
+<p> 为了解决上述中的问题实现，把里面的单独项分别出来，分别复制里面的单独项。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs plain">function deepClone(obj) &#123;<br>    if(obj &#x3D;&#x3D;&#x3D; null || !obj) return obj<br>    if(typeof obj !&#x3D;&#x3D; &#39;object&#39;) return obj<br>    if(obj instanceof RegExp) return new RegExp(obj)<br>    if(obj instanceof Date) return new Date(obj)<br>    let result &#x3D; Array.isArray(obj)?[]:&#123;&#125;;<br><br>     for(let key in obj)&#123;<br>        if(obj.hasOwnProperty(key))&#123;<br>            if(obj[key] &amp;&amp; typeof obj[key] &#x3D;&#x3D;&#x3D; &quot;object&quot;)&#123;<br>                result[key] &#x3D; deepClone(obj[key]);<br>            &#125;else&#123;<br>            result[key] &#x3D; obj[key];<br>            &#125;<br>        &#125;<br>    &#125;<br>    return result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p> 然后测试一下手写的代码，如图</p>
+ <img src="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep3.png">
+ <img src="https://raw.githubusercontent.com/jetBn/blog/master/assets/md_images/ndeep4.png">
+
+<p> 发现已经解决了 上面<code>JSON.stringify()</code>方法的不足， 就是<code>undefined</code>、<code>symbol</code>的无法拷贝。自己实现的深拷贝在一些复杂的对象中可能会出现一些问题，慢慢完善吧。但是基本的数据类型还都是可以实现拷贝的。</p>
+</li>
+</ol>
+</li>
 </ol>
 
       
@@ -428,7 +424,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/" title="JS节流与防抖" target="_blank" rel="external">http://jetbn.github.io/2020/05/09/%E4%B8%8E%E9%98%B2%E6%8A%96/</a>
+      <a href="http://jetbn.github.io/2021/07/05/%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="深拷贝与浅拷贝" target="_blank" rel="external">http://jetbn.github.io/2021/07/05/%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -474,13 +470,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/05/09/t%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" title="Git常用命令记录"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/04/30/%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84CSS/" title="你不知道的CSS "><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/07/05/Event-Loop/" title="Event Loop"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
